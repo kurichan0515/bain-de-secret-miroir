@@ -1,0 +1,257 @@
+{
+  "phase": 1,
+  "title": "直感スワイプ",
+  "description": "1〜2秒で直感的に「惹かれる（右）」か「惹かれない（左）」かを選んでください",
+  "questions": [
+    {
+      "id": 1,
+      "text": "鈍く光る銀の手錠",
+      "attributes": ["Bondage", "Restraint"]
+    },
+    {
+      "id": 2,
+      "text": "「私物」として扱われることの悦び",
+      "attributes": ["Submission", "Possession"]
+    },
+    {
+      "id": 3,
+      "text": "完全に意思を手放し、ただ従う安堵感",
+      "attributes": ["Submission", "Power Exchange"]
+    },
+    {
+      "id": 4,
+      "text": "完璧に整えられたチョーカー",
+      "attributes": ["Possession", "Discipline"]
+    },
+    {
+      "id": 5,
+      "text": "視界を完全に奪う、重厚なアイマスク",
+      "attributes": ["Sensory Deprivation", "Submission"]
+    },
+    {
+      "id": 6,
+      "text": "「そこから動かないで」という一言",
+      "attributes": ["Dominance", "Command"]
+    },
+    {
+      "id": 7,
+      "text": "床にひざまずき、見上げる視線",
+      "attributes": ["Submission", "Position"]
+    },
+    {
+      "id": 8,
+      "text": "相手のすべてをコントロールする全能感",
+      "attributes": ["Dominance", "Control"]
+    },
+    {
+      "id": 9,
+      "text": "自分のためだけに作られた「厳格なルール」",
+      "attributes": ["Discipline", "Order"]
+    },
+    {
+      "id": 10,
+      "text": "規則的な鞭の風切り音",
+      "attributes": ["Sadism", "Auditory Stimulus"]
+    },
+    {
+      "id": 11,
+      "text": "首輪という、所有を証明する冷たい感触",
+      "attributes": ["Possession", "Bondage"]
+    },
+    {
+      "id": 12,
+      "text": "「いい子だ」という静かな承認",
+      "attributes": ["Care", "Reward"]
+    },
+    {
+      "id": 13,
+      "text": "皮膚に残る、微かな赤い痕跡",
+      "attributes": ["Sadism", "Masochism", "Mark"]
+    },
+    {
+      "id": 14,
+      "text": "許しを乞うまで与えられない報酬",
+      "attributes": ["Power Exchange", "Denial"]
+    },
+    {
+      "id": 15,
+      "text": "静かな廊下に響くヒールの足音",
+      "attributes": ["Dominance", "Psychological Pressure"]
+    },
+    {
+      "id": 16,
+      "text": "言葉を発することを禁じられた沈黙",
+      "attributes": ["Discipline", "Silence"]
+    },
+    {
+      "id": 17,
+      "text": "相手の反応を冷酷に観察する視線",
+      "attributes": ["Voyeurism", "Sadism"]
+    },
+    {
+      "id": 18,
+      "text": "「安全言葉（セーフワード）」という唯一の命綱",
+      "attributes": ["Trust", "Hard Play"]
+    },
+    {
+      "id": 19,
+      "text": "鏡の前で、自分の無防備な姿を強制的に見せられること",
+      "attributes": ["Exhibitionism", "Psychological"]
+    },
+    {
+      "id": 20,
+      "text": "相手の手足を縛り、自分の手で少しずつ食べさせてあげる",
+      "attributes": ["Dominance", "Care"]
+    },
+    {
+      "id": 21,
+      "text": "手首に食い込む、本革の冷たい感触",
+      "attributes": ["Bondage", "Physical Restraint"]
+    },
+    {
+      "id": 22,
+      "text": "耳元を掠める冷たい吐息",
+      "attributes": ["Sensory", "Intimacy"]
+    },
+    {
+      "id": 23,
+      "text": "錠前がカチャリと鳴る音",
+      "attributes": ["Bondage", "Psychological Closure"]
+    },
+    {
+      "id": 24,
+      "text": "衣擦れの微かな音",
+      "attributes": ["Sensory", "Anticipation"]
+    },
+    {
+      "id": 25,
+      "text": "相手の理性を少しずつ壊していく愉悦",
+      "attributes": ["Sadism", "Psychological"]
+    },
+    {
+      "id": 26,
+      "text": "限界まで焦らされ、懇願すること",
+      "attributes": ["Masochism", "Denial"]
+    },
+    {
+      "id": 27,
+      "text": "涙を流す顔を見る（見られる）興奮",
+      "attributes": ["Sadism", "Masochism", "Emotional"]
+    },
+    {
+      "id": 28,
+      "text": "衆人環視の中での、誰にも気づかれない命令",
+      "attributes": ["Exhibitionism", "Psychological"]
+    },
+    {
+      "id": 29,
+      "text": "契約書にサインをする瞬間の震え",
+      "attributes": ["Power Exchange", "Contract"]
+    },
+    {
+      "id": 30,
+      "text": "完全に孤立させられた、暗く狭い空間",
+      "attributes": ["Bondage", "Isolation"]
+    },
+    {
+      "id": 31,
+      "text": "痛みが快感に反転する、あの境界線",
+      "attributes": ["Masochism", "Sensation"]
+    },
+    {
+      "id": 32,
+      "text": "日常の自分とは完全に違う「役割」",
+      "attributes": ["Roleplay", "Escape"]
+    },
+    {
+      "id": 33,
+      "text": "誰にも言えない秘密を共有する共犯関係",
+      "attributes": ["Psychological", "Intimacy"]
+    },
+    {
+      "id": 34,
+      "text": "相手の弱い部分を完璧に把握している余裕",
+      "attributes": ["Dominance", "Psychological"]
+    },
+    {
+      "id": 35,
+      "text": "逃げ出したい恐怖と、抗いがたい魅力の葛藤",
+      "attributes": ["Masochism", "Psychological"]
+    },
+    {
+      "id": 36,
+      "text": "すべてが終わった後の、甘く深い疲労感",
+      "attributes": ["Aftercare", "Release"]
+    },
+    {
+      "id": 37,
+      "text": "体温を持たない、冷たい金属の質感",
+      "attributes": ["Sensory", "Coldness"]
+    },
+    {
+      "id": 38,
+      "text": "予測できないタイミングで与えられる刺激",
+      "attributes": ["Sadism", "Masochism", "Surprise"]
+    },
+    {
+      "id": 39,
+      "text": "重厚な扉が内側から施錠される音",
+      "attributes": ["Bondage", "Security"]
+    },
+    {
+      "id": 40,
+      "text": "相手の心音だけが聞こえる密着",
+      "attributes": ["Intimacy", "Sensory"]
+    },
+    {
+      "id": 41,
+      "text": "監視カメラの赤いランプ",
+      "attributes": ["Voyeurism", "Exhibitionism"]
+    },
+    {
+      "id": 42,
+      "text": "一滴の熱い蝋燭の雫",
+      "attributes": ["Sadism", "Masochism", "Temperature"]
+    },
+    {
+      "id": 43,
+      "text": "ガラス張りの密室",
+      "attributes": ["Exhibitionism", "Voyeurism"]
+    },
+    {
+      "id": 44,
+      "text": "月明かりだけが差すベッド",
+      "attributes": ["Atmosphere", "Romantic"]
+    },
+    {
+      "id": 45,
+      "text": "蜘蛛の巣に捕らわれた蝶",
+      "attributes": ["Bondage", "Metaphor"]
+    },
+    {
+      "id": 46,
+      "text": "誰かが覗き込んでいる鍵穴",
+      "attributes": ["Voyeurism", "Secret"]
+    },
+    {
+      "id": 47,
+      "text": "傷跡を愛おしむような、静かなアフターケア",
+      "attributes": ["Aftercare", "Intimacy"]
+    },
+    {
+      "id": 48,
+      "text": "「許してほしい？」という問いかけ",
+      "attributes": ["Dominance", "Psychological"]
+    },
+    {
+      "id": 49,
+      "text": "言葉による精神的な追い詰め",
+      "attributes": ["Psychological Sadism"]
+    },
+    {
+      "id": 50,
+      "text": "深い霧で見通せない湖面",
+      "attributes": ["Atmosphere", "Mystery"]
+    }
+  ]
+}

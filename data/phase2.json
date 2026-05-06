@@ -1,0 +1,169 @@
+{
+  "phase": 2,
+  "title": "シチュエーション選択",
+  "description": "4つの選択肢から、自分の心が最も動くものを選んでください",
+  "questions": [
+    {
+      "id": 1,
+      "title": "契約の夜",
+      "scenario": "白紙の契約書に書くルール",
+      "choices": [
+        {
+          "id": "A",
+          "text": "すべての決定権を譲渡する",
+          "attributes": ["Submission"]
+        },
+        {
+          "id": "B",
+          "text": "許可なく指一本動かすな",
+          "attributes": ["Dominance"]
+        },
+        {
+          "id": "C",
+          "text": "恥ずかしい秘密を共有する",
+          "attributes": ["Psychological"]
+        },
+        {
+          "id": "D",
+          "text": "セーフワードを設定する",
+          "attributes": ["Trust", "Care"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "視界の境界線",
+      "scenario": "シルクの目隠しを使う際の役割",
+      "choices": [
+        {
+          "id": "A",
+          "text": "相手の目を隠して観察する",
+          "attributes": ["Sadism", "Voyeurism"]
+        },
+        {
+          "id": "B",
+          "text": "相手に目隠しをされるのを待つ",
+          "attributes": ["Submission", "Restraint"]
+        },
+        {
+          "id": "C",
+          "text": "隙間から覗き見る",
+          "attributes": ["Psychological", "Rebellion"]
+        },
+        {
+          "id": "D",
+          "text": "目隠しをして耳元で囁き焦らす",
+          "attributes": ["Dominance", "Psychological"]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "完全なる拘束",
+      "scenario": "椅子に固定された絶望的な状況での感情",
+      "choices": [
+        {
+          "id": "A",
+          "text": "圧倒的な安堵感と陶酔",
+          "attributes": ["Bondage", "Submission"]
+        },
+        {
+          "id": "B",
+          "text": "抵抗して相手のS気を煽る",
+          "attributes": ["Brat", "Masochism"]
+        },
+        {
+          "id": "C",
+          "text": "自分は縛る側（確認する側）だ",
+          "attributes": ["Dominance"]
+        },
+        {
+          "id": "D",
+          "text": "無様な姿を鏡で見せられる興奮",
+          "attributes": ["Exhibitionism"]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "美しき罰",
+      "scenario": "ルールを破った際の「罰」の時間のスリル",
+      "choices": [
+        {
+          "id": "A",
+          "text": "冷徹な計算で相手を躾け直す",
+          "attributes": ["Sadism", "Discipline"]
+        },
+        {
+          "id": "B",
+          "text": "恐怖に震えながら許しを乞う",
+          "attributes": ["Masochism", "Submission"]
+        },
+        {
+          "id": "C",
+          "text": "痛みが来る直前の焦らし",
+          "attributes": ["Psychological"]
+        },
+        {
+          "id": "D",
+          "text": "屈辱的な言葉を言わせる",
+          "attributes": ["Psychological Sadism"]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "境界線の融解",
+      "scenario": "肌に残った「痕跡（傷や熱）」の意味",
+      "choices": [
+        {
+          "id": "A",
+          "text": "所有権の証明",
+          "attributes": ["Dominance"]
+        },
+        {
+          "id": "B",
+          "text": "支配されている証",
+          "attributes": ["Submission", "Masochism"]
+        },
+        {
+          "id": "C",
+          "text": "感覚が真っ白になる鍵",
+          "attributes": ["Extreme Masochism"]
+        },
+        {
+          "id": "D",
+          "text": "耐性の限界を測る実験データ",
+          "attributes": ["Analytical Sadism"]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "静寂の帰還",
+      "scenario": "プレイが終わった後の「アフターケア」",
+      "choices": [
+        {
+          "id": "A",
+          "text": "抱きしめられ肯定されたい",
+          "attributes": ["Submissive Aftercare"]
+        },
+        {
+          "id": "B",
+          "text": "相手の尊厳を整えてあげたい",
+          "attributes": ["Dominant Aftercare"]
+        },
+        {
+          "id": "C",
+          "text": "すぐに冷たく立ち去りたい",
+          "attributes": ["Emotional Detachment"]
+        },
+        {
+          "id": "D",
+          "text": "冷静に振り返り次を話し合いたい",
+          "attributes": ["Analytical"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "scoring_config": {
+    "phase1_weight": 1,
+    "phase2_weight": 2,
+    "phase3_weight": 3,
+    "axes": {
+      "dominance": {
+        "label": "Dominance（支配）",
+        "abbreviation": "D",
+        "description": "相手をコントロールし、主導権を握ることへの欲求",
+        "color": "#8B0000"
+      },
+      "submission": {
+        "label": "Submission（服従）",
+        "abbreviation": "S",
+        "description": "意思を委ね、導かれることへの安堵と喜び",
+        "color": "#00008B"
+      },
+      "bondage": {
+        "label": "Bondage（拘束）",
+        "abbreviation": "B",
+        "description": "物理的・心理的な束縛への憧れまたは欲求",
+        "color": "#2F4F4F"
+      },
+      "discipline": {
+        "label": "Discipline（調教）",
+        "abbreviation": "D",
+        "description": "ルールと秩序による関係性の構築",
+        "color": "#4B0082"
+      },
+      "sadism": {
+        "label": "Sadism（加虐）",
+        "abbreviation": "S",
+        "description": "相手に刺激を与え、反応を観察する愉悦",
+        "color": "#8B008B"
+      },
+      "masochism": {
+        "label": "Masochism（被虐）",
+        "abbreviation": "M",
+        "description": "痛みや屈辱が快感に変わる境界線への探求",
+        "color": "#FF1493"
+      },
+      "psychological": {
+        "label": "Psychological（心理的）",
+        "abbreviation": "P",
+        "description": "精神的な駆け引きと深い心理的つながり",
+        "color": "#191970"
+      },
+      "sensory": {
+        "label": "Sensory（感覚的）",
+        "abbreviation": "Se",
+        "description": "五感を通じた繊細な刺激への敏感さ",
+        "color": "#6A5ACD"
+      },
+      "exhibitionism": {
+        "label": "Exhibitionism（露出）",
+        "abbreviation": "E",
+        "description": "見られること、晒されることへの欲求",
+        "color": "#DC143C"
+      },
+      "voyeurism": {
+        "label": "Voyeurism（覗き見）",
+        "abbreviation": "V",
+        "description": "観察し、秘密を知ることへの欲求",
+        "color": "#483D8B"
+      }
+    },
+    "phase1_mapping": {
+      "1": ["bondage", "restraint"],
+      "2": ["submission", "possession"],
+      "3": ["submission", "power_exchange"],
+      "4": ["possession", "discipline"],
+      "5": ["sensory_deprivation", "submission"],
+      "6": ["dominance", "command"],
+      "7": ["submission", "position"],
+      "8": ["dominance", "control"],
+      "9": ["discipline", "order"],
+      "10": ["sadism", "auditory"],
+      "11": ["possession", "bondage"],
+      "12": ["care", "reward"],
+      "13": ["sadism", "masochism", "mark"],
+      "14": ["power_exchange", "denial"],
+      "15": ["dominance", "psychological"],
+      "16": ["discipline", "silence"],
+      "17": ["voyeurism", "sadism"],
+      "18": ["trust", "hard_play"],
+      "19": ["exhibitionism", "psychological"],
+      "20": ["dominance", "care"],
+      "21": ["bondage", "physical"],
+      "22": ["sensory", "intimacy"],
+      "23": ["bondage", "psychological"],
+      "24": ["sensory", "anticipation"],
+      "25": ["sadism", "psychological"],
+      "26": ["masochism", "denial"],
+      "27": ["sadism", "masochism", "emotional"],
+      "28": ["exhibitionism", "psychological"],
+      "29": ["power_exchange", "contract"],
+      "30": ["bondage", "isolation"],
+      "31": ["masochism", "sensation"],
+      "32": ["roleplay", "escape"],
+      "33": ["psychological", "intimacy"],
+      "34": ["dominance", "psychological"],
+      "35": ["masochism", "psychological"],
+      "36": ["aftercare", "release"],
+      "37": ["sensory", "coldness"],
+      "38": ["sadism", "masochism", "surprise"],
+      "39": ["bondage", "security"],
+      "40": ["intimacy", "sensory"],
+      "41": ["voyeurism", "exhibitionism"],
+      "42": ["sadism", "masochism", "temperature"],
+      "43": ["exhibitionism", "voyeurism"],
+      "44": ["atmosphere", "romantic"],
+      "45": ["bondage", "metaphor"],
+      "46": ["voyeurism", "secret"],
+      "47": ["aftercare", "intimacy"],
+      "48": ["dominance", "psychological"],
+      "49": ["psychological_sadism"],
+      "50": ["atmosphere", "mystery"]
+    }
+  },
+  "result_types": {
+    "dominant_caregiver": {
+      "name": "優雅なる支配者",
+      "name_en": "Dominant Caregiver",
+      "description": "厳格さと優しさを併せ持つ、理想的な支配者タイプ",
+      "traits": ["高いD軸", "中程度のS（Sadism）", "高いCare"],
+      "compatible_types": ["submissive_seeker", "masochistic_devotee"]
+    },
+    "submissive_seeker": {
+      "name": "深淵の探求者",
+      "name_en": "Submissive Seeker",
+      "description": "服従の中に安らぎを見出す、献身的なタイプ",
+      "traits": ["高いS（Submission）", "中程度のM", "Trust重視"],
+      "compatible_types": ["dominant_caregiver", "psychological_master"]
+    },
+    "psychological_master": {
+      "name": "心理的支配者",
+      "name_en": "Psychological Master",
+      "description": "精神的な駆け引きを好む、知的な支配者",
+      "traits": ["高いPsychological", "中程度のD", "低いPhysical"],
+      "compatible_types": ["submissive_seeker", "analytical_switch"]
+    },
+    "sensory_artist": {
+      "name": "感覚の芸術家",
+      "name_en": "Sensory Artist",
+      "description": "五感を通じた繊細な刺激を追求する美学者",
+      "traits": ["高いSensory", "中程度のS（Sadism）", "高いAesthetic"],
+      "compatible_types": ["submissive_seeker", "masochistic_devotee"]
+    },
+    "masochistic_devotee": {
+      "name": "献身的な被虐者",
+      "name_en": "Masochistic Devotee",
+      "description": "痛みと快楽の境界を探求する勇敢な魂",
+      "traits": ["高いM", "高いS（Submission）", "Trust重視"],
+      "compatible_types": ["dominant_caregiver", "sadistic_observer"]
+    },
+    "sadistic_observer": {
+      "name": "冷徹なる観察者",
+      "name_en": "Sadistic Observer",
+      "description": "相手の反応を冷静に観察し、刺激を与える探求者",
+      "traits": ["高いS（Sadism）", "高いVoyeurism", "分析的"],
+      "compatible_types": ["masochistic_devotee", "exhibitionist_performer"]
+    },
+    "exhibitionist_performer": {
+      "name": "舞台の主役",
+      "name_en": "Exhibitionist Performer",
+      "description": "見られることで輝く、表現者タイプ",
+      "traits": ["高いExhibitionism", "中程度のS（Submission）", "表現欲"],
+      "compatible_types": ["voyeuristic_director", "sadistic_observer"]
+    },
+    "voyeuristic_director": {
+      "name": "静かなる演出家",
+      "name_en": "Voyeuristic Director",
+      "description": "観察し、導く視線を持つ演出者",
+      "traits": ["高いVoyeurism", "中程度のD", "Control重視"],
+      "compatible_types": ["exhibitionist_performer", "submissive_seeker"]
+    },
+    "analytical_switch": {
+      "name": "知的な両刃",
+      "name_en": "Analytical Switch",
+      "description": "状況に応じて役割を変える、柔軟な知性派",
+      "traits": ["バランス型", "高いPsychological", "分析的"],
+      "compatible_types": ["psychological_master", "sensory_artist"]
+    },
+    "bondage_enthusiast": {
+      "name": "拘束の詩人",
+      "name_en": "Bondage Enthusiast",
+      "description": "束縛という芸術を愛する美的探求者",
+      "traits": ["高いBondage", "中程度のS（Sadism/Submission）", "美学重視"],
+      "compatible_types": ["submissive_seeker", "masochistic_devotee"]
+    }
+  }
+}
