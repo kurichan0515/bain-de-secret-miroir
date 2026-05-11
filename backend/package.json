@@ -1,0 +1,19 @@
+{
+  "name": "bain-de-secret-miroir-backend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "esbuild src/handlers/analyze.ts --bundle --platform=node --target=node18 --outdir=dist/handlers --external:@aws-sdk/*",
+    "clean": "rm -rf dist function.zip",
+    "package": "npm run clean && npm run build && cd dist && zip -r ../function.zip ."
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^20.16.11",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  }
+}

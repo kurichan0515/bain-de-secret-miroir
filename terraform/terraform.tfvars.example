@@ -1,0 +1,7 @@
+project_name   = "bsm"
+aws_region     = "ap-northeast-1"
+stage          = "prod"
+gemini_api_key = "YOUR_GEMINI_API_KEY"
+
+# 本番環境ではVercelのドメインに変更する
+# allowed_origins = ["https://your-vercel-domain.vercel.app"]

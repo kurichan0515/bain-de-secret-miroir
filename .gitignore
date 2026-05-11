@@ -54,6 +54,19 @@ samconfig.toml
 .serverless/
 .build/
 
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
+*.tfvars
+!*.tfvars.example
+
+# Backend build artifacts
+backend/dist/
+backend/function.zip
+
 # Logs
 logs
 *.log

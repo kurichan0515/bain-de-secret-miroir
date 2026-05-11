@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #05070A;
+  color: #FFFFFF;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea,
+button {
+  font-family: inherit;
+}
+
+/* PC でのはみ出し防止 */
+#root {
+  overflow-x: hidden;
+}
+
+/* 日本語テキストの改行制御 */
+p, span, h1, h2, h3, button, label {
+  line-break: strict;        /* 句読点・括弧の行頭/行末ルールを厳格適用 */
+  overflow-wrap: break-word; /* どうしても収まらない場合のみ折り返す */
+}
+
+::selection {
+  background: rgba(26, 43, 72, 0.6);
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #05070A;
+}
+::-webkit-scrollbar-thumb {
+  background: #1A2B48;
+  border-radius: 2px;
+}

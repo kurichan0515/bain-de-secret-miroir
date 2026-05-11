@@ -1,167 +1,197 @@
 {
   "phase": 2,
   "title": "シチュエーション選択",
-  "description": "4つの選択肢から、自分の心が最も動くものを選んでください",
+  "description": "提示されたシチュエーションに対し、あなたが「最も自分らしい」と感じる行動、あるいは「最も心が昂る」結末を一つ選んでください。",
   "questions": [
     {
       "id": 1,
-      "title": "契約の夜",
-      "scenario": "白紙の契約書に書くルール",
+      "title": "契約の儀",
+      "title_en": "The Contract",
+      "scenario": "重厚なベルベットのカーテンで仕切られた個室。見知らぬ美しい人が、あなたの前にペンと『白紙の契約書』を差し出しました。この部屋における『絶対的なルール』を一つだけ刻むとしたら？",
       "choices": [
         {
           "id": "A",
-          "text": "すべての決定権を譲渡する",
-          "attributes": ["Submission"]
+          "text": "「私の身体と意思のすべてを、あなたに完全に明け渡す」と書く。",
+          "tag": "委ねる",
+          "axes": ["submission"]
         },
         {
           "id": "B",
-          "text": "許可なく指一本動かすな",
-          "attributes": ["Dominance"]
+          "text": "「私が許可するまで、あなたは呼吸以外のすべてを停止せよ」と書く。",
+          "tag": "命じる",
+          "axes": ["dominance"]
         },
         {
           "id": "C",
-          "text": "恥ずかしい秘密を共有する",
-          "attributes": ["Psychological"]
+          "text": "「お互いの最も醜く、最も恥ずかしい秘密を今ここで共有する」と書く。",
+          "tag": "共犯",
+          "axes": ["psychological"]
         },
         {
           "id": "D",
-          "text": "セーフワードを設定する",
-          "attributes": ["Trust", "Care"]
+          "text": "「私がセーフワード（安全言葉）を口にした瞬間、すべてを白紙に戻す」と書く。",
+          "tag": "信頼",
+          "axes": ["submission", "psychological"]
         }
       ]
     },
     {
       "id": 2,
-      "title": "視界の境界線",
-      "scenario": "シルクの目隠しを使う際の役割",
+      "title": "視界の消失",
+      "title_en": "The Blindfold",
+      "scenario": "銀のトレイの上に、上質なシルクの目隠しが置かれています。このアイテムを手に取ったとき、あなたの脳裏に浮かぶ光景は？",
       "choices": [
         {
           "id": "A",
-          "text": "相手の目を隠して観察する",
-          "attributes": ["Sadism", "Voyeurism"]
+          "text": "相手の目を力強く覆い、視界を奪われた相手が不安に震える姿を眺める。",
+          "tag": "奪う",
+          "axes": ["sadism"]
         },
         {
           "id": "B",
-          "text": "相手に目隠しをされるのを待つ",
-          "attributes": ["Submission", "Restraint"]
+          "text": "相手の前にひざまずき、自分の目が覆われるのを静かに、従順に待つ。",
+          "tag": "従う",
+          "axes": ["submission"]
         },
         {
           "id": "C",
-          "text": "隙間から覗き見る",
-          "attributes": ["Psychological", "Rebellion"]
+          "text": "自分で目隠しをするが、密かに指の隙間から、相手の表情を盗み見る。",
+          "tag": "盗み見る",
+          "axes": ["psychological", "voyeurism"]
         },
         {
           "id": "D",
-          "text": "目隠しをして耳元で囁き焦らす",
-          "attributes": ["Dominance", "Psychological"]
+          "text": "相手の目を隠した上で、耳元で「これから何をするか」を詳細に囁き、期待と恐怖を煽る。",
+          "tag": "煽る",
+          "axes": ["dominance", "psychological"]
         }
       ]
     },
     {
       "id": 3,
-      "title": "完全なる拘束",
-      "scenario": "椅子に固定された絶望的な状況での感情",
+      "title": "鉄の拘束",
+      "title_en": "Absolute Restraint",
+      "scenario": "あなたは冷たい革のベルトで、重い椅子に完全に固定されました。指先一つ、眉一つ動かせない絶望的な状況で、あなたの心に湧き上がるのは？",
       "choices": [
         {
           "id": "A",
-          "text": "圧倒的な安堵感と陶酔",
-          "attributes": ["Bondage", "Submission"]
+          "text": "「もう何もしなくていい」という、抗えない拘束への圧倒的な安堵感。",
+          "tag": "溶ける",
+          "axes": ["bondage", "submission"]
         },
         {
           "id": "B",
-          "text": "抵抗して相手のS気を煽る",
-          "attributes": ["Brat", "Masochism"]
+          "text": "必死に縄目を軋ませて抵抗し、相手の嗜虐心をさらに激しく煽りたい。",
+          "tag": "抗う",
+          "axes": ["masochism"]
         },
         {
           "id": "C",
-          "text": "自分は縛る側（確認する側）だ",
-          "attributes": ["Dominance"]
+          "text": "自分が縛られることはあり得ない。私はそのベルトの締まり具合を冷酷に点検する側だ。",
+          "tag": "管理する",
+          "axes": ["dominance"]
         },
         {
           "id": "D",
-          "text": "無様な姿を鏡で見せられる興奮",
-          "attributes": ["Exhibitionism"]
+          "text": "縛り上げられ無様な姿になった自分を、大きな鏡で見せつけられる羞恥。",
+          "tag": "晒される",
+          "axes": ["exhibitionism", "masochism"]
         }
       ]
     },
     {
       "id": 4,
       "title": "美しき罰",
-      "scenario": "ルールを破った際の「罰」の時間のスリル",
+      "title_en": "The Punishment",
+      "scenario": "設定されたルールが破られました。部屋の空気が凍りつき、冷徹な「罰」の時間が始まります。あなたが最もスリルを感じる瞬間は？",
       "choices": [
         {
           "id": "A",
-          "text": "冷徹な計算で相手を躾け直す",
-          "attributes": ["Sadism", "Discipline"]
+          "text": "冷静な計算に基づき、相手に的確な痛みと屈辱を与え、その精神を躾け直すとき。",
+          "tag": "執行する",
+          "axes": ["sadism", "discipline"]
         },
         {
           "id": "B",
-          "text": "恐怖に震えながら許しを乞う",
-          "attributes": ["Masochism", "Submission"]
+          "text": "恐怖に震えながら許しを乞うが、無慈悲に、そして淡々と罰が下されるとき。",
+          "tag": "受け入れる",
+          "axes": ["masochism", "submission"]
         },
         {
           "id": "C",
-          "text": "痛みが来る直前の焦らし",
-          "attributes": ["Psychological"]
+          "text": "痛みが与えられる直前の、何が・いつ・どこに来るか分からない極限の空白。",
+          "tag": "待ちわびる",
+          "axes": ["psychological", "masochism"]
         },
         {
           "id": "D",
-          "text": "屈辱的な言葉を言わせる",
-          "attributes": ["Psychological Sadism"]
+          "text": "物理的な痛みではなく、最も屈辱的な言葉を、自らの口で言わされるとき。",
+          "tag": "辱められる",
+          "axes": ["psychological", "masochism"]
         }
       ]
     },
     {
       "id": 5,
-      "title": "境界線の融解",
-      "scenario": "肌に残った「痕跡（傷や熱）」の意味",
+      "title": "刻印の証明",
+      "title_en": "Pain & Pleasure",
+      "scenario": "鋭い痛みと共に、肌に鮮やかな痕跡（跡や熱）が刻まれました。その「印」を眺めながら、あなたはどんな意味を見出しますか？",
       "choices": [
         {
           "id": "A",
-          "text": "所有権の証明",
-          "attributes": ["Dominance"]
+          "text": "「これは私の所有物である」という、相手の肌に刻んだ確かな支配の証明。",
+          "tag": "刻印する",
+          "axes": ["dominance", "sadism"]
         },
         {
           "id": "B",
-          "text": "支配されている証",
-          "attributes": ["Submission", "Masochism"]
+          "text": "「私は誰かのものになった」という、肌に残る熱から感じる深い帰属意識。",
+          "tag": "刻まれる",
+          "axes": ["submission", "masochism"]
         },
         {
           "id": "C",
-          "text": "感覚が真っ白になる鍵",
-          "attributes": ["Extreme Masochism"]
+          "text": "痛みが極限を超え、現実感が消えて頭の中が真っ白になる恍惚の状態。",
+          "tag": "融解する",
+          "axes": ["masochism"]
         },
         {
           "id": "D",
-          "text": "耐性の限界を測る実験データ",
-          "attributes": ["Analytical Sadism"]
+          "text": "相手がどこまでの刺激に耐え、どこで理性を失うかを見極めるための実験データ。",
+          "tag": "観測する",
+          "axes": ["sadism", "voyeurism"]
         }
       ]
     },
     {
       "id": 6,
-      "title": "静寂の帰還",
-      "scenario": "プレイが終わった後の「アフターケア」",
+      "title": "事後の余韻",
+      "title_en": "The Aftercare",
+      "scenario": "激しいプレイが終わり、アドレナリンが引いていきました。深い静寂の中、あなたが相手に最も求めていることは？",
       "choices": [
         {
           "id": "A",
-          "text": "抱きしめられ肯定されたい",
-          "attributes": ["Submissive Aftercare"]
+          "text": "強く抱きしめられ、「よく頑張ったね」という優しい肯定の言葉で満たされたい。",
+          "tag": "満たされる",
+          "axes": ["submission", "psychological"]
         },
         {
           "id": "B",
-          "text": "相手の尊厳を整えてあげたい",
-          "attributes": ["Dominant Aftercare"]
+          "text": "相手の乱れた髪や傷跡を丁寧に整え、慈しみながらその尊厳を回復させてあげたい。",
+          "tag": "守る",
+          "axes": ["dominance"]
         },
         {
           "id": "C",
-          "text": "すぐに冷たく立ち去りたい",
-          "attributes": ["Emotional Detachment"]
+          "text": "何も言わず、余韻だけを残してその場を立ち去り、孤独な熱を一人で楽しみたい。",
+          "tag": "孤独に浸る",
+          "axes": ["psychological"]
         },
         {
           "id": "D",
-          "text": "冷静に振り返り次を話し合いたい",
-          "attributes": ["Analytical"]
+          "text": "プレイ中の反応を冷静に分析し、次はどの境界線を越えるかを対等に話し合いたい。",
+          "tag": "分析する",
+          "axes": ["psychological", "sadism"]
         }
       ]
     }
