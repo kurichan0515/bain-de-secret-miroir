@@ -40,40 +40,12 @@ function SectionLabel({ children }: { children: string }) {
 export default function ResultPage() {
   const navigate = useNavigate()
   const { result, reset } = useAnswerStore()
-  const [shareState, setShareState] = useState<'idle' | 'generating' | 'done'>('idle')
   const [saveState, setSaveState] = useState<'idle' | 'generating' | 'done'>('idle')
 
   const generateImage = useCallback(async () => {
     if (!result) return null
     return await generateShareImage(result)
   }, [result])
-
-  const handleShareX = useCallback(async () => {
-    if (!result || shareState === 'generating') return
-    setShareState('generating')
-    const shareText = `【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n相性タイプ:「${result.compatible_type}」\n\n${result.catchphrase}\n\n#BainDeSecretMiroir #${result.type_name} #${result.compatible_type}`
-    try {
-      const blob = await generateImage()
-      if (!blob) throw new Error()
-      const file = new File([blob], 'bain-de-secret-miroir.png', { type: 'image/png' })
-
-      if (navigator.share && navigator.canShare?.({ files: [file] })) {
-        await navigator.share({ files: [file], text: shareText })
-      } else {
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = 'bain-de-secret-miroir.png'
-        a.click()
-        URL.revokeObjectURL(url)
-        const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.origin)}`
-        window.open(twitterUrl, '_blank')
-      }
-      setShareState('done')
-    } catch {
-      setShareState('idle')
-    }
-  }, [result, shareState, generateImage])
 
   const handleSaveImage = useCallback(async () => {
     if (!result || saveState === 'generating') return
@@ -287,21 +259,21 @@ export default function ResultPage() {
         {/* ── アクション ── */}
         <motion.div className="flex flex-col gap-3 px-2" variants={itemVariants}>
 
-          {/* X 投稿（画像付き） */}
-          <button
-            onClick={handleShareX}
-            disabled={shareState === 'generating'}
+          {/* X 投稿 */}
+          <a
+            href={`https://x.com/intent/tweet?text=${encodeURIComponent(`【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n相性タイプ:「${result.compatible_type}」\n\n${result.catchphrase}\n\n#BainDeSecretMiroir #${result.type_name} #${result.compatible_type}`)}&url=${encodeURIComponent(window.location.origin)}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center py-4 text-sm tracking-widest"
             style={{
               border: '1px solid rgba(255,255,255,0.2)',
-              background: shareState === 'done' ? 'rgba(255,255,255,0.05)' : 'transparent',
-              color: shareState === 'generating' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.85)',
-              cursor: shareState === 'generating' ? 'default' : 'pointer',
+              color: 'rgba(255,255,255,0.85)',
               fontFamily: 'Cinzel, serif',
+              textDecoration: 'none',
             }}
           >
-            {shareState === 'generating' ? 'Generating...' : shareState === 'done' ? 'Shared ✓' : 'X に投稿する（画像付き）'}
-          </button>
+            X に投稿する
+          </a>
 
           {/* 画像だけ保存 */}
           <button
