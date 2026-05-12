@@ -3,7 +3,7 @@ import { motion, type Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAnswerStore } from '../store/useAnswerStore'
 import { AdBanner } from '../components/AdBanner'
-import { AxisChart } from '../components/AxisChart'
+import { RadarChart } from '../components/RadarChart'
 import { TypeLandscape } from '../components/TypeLandscape'
 import { generateShareImage } from '../lib/generateShareImage'
 
@@ -236,11 +236,11 @@ export default function ResultPage() {
 
         <Divider />
 
-        {/* ── 軸スコアチャート ── */}
+        {/* ── レーダーチャート ── */}
         {result.radar_scores && (
           <motion.div className="px-2" variants={itemVariants}>
             <SectionLabel>BDSM Spectrum Score</SectionLabel>
-            <AxisChart scores={result.radar_scores} />
+            <RadarChart scores={result.radar_scores} />
           </motion.div>
         )}
 
