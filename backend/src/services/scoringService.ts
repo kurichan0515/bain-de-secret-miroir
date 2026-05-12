@@ -34,57 +34,83 @@ for (const q of phase2DataBdsm.questions as Array<{
 
 type ScoreDelta = Partial<Record<keyof AxisScores, number>>
 
-const DEFAULT_P1_SCORES: Record<string, ScoreDelta> = {}
-
-// Q1–Q8: 管理・ルール → D +1
-for (let i = 1; i <= 8; i++) DEFAULT_P1_SCORES[String(i)] = { dominance: 1 }
-// Q9–Q15: 焦らし・執着 → D +1, Sad +1
-for (let i = 9; i <= 15; i++) DEFAULT_P1_SCORES[String(i)] = { dominance: 1, sadism: 1 }
-// Q16–Q22: 放棄・安心 → S +1
-for (let i = 16; i <= 22; i++) DEFAULT_P1_SCORES[String(i)] = { submission: 1 }
-// Q23–Q30: 窮屈さ・冷たさ → S +1, Mas +1
-for (let i = 23; i <= 30; i++) DEFAULT_P1_SCORES[String(i)] = { submission: 1, masochism: 1 }
-// Q31–Q40: 観測・背徳・視線・心理戦 → Psy +1
+const DEFAULT_P1_SCORES: Record<string, ScoreDelta> = {
+  // Q1-15: 支配・加虐
+  '1':  { dominance: 1, submission: -1, psychological: 1 },
+  '2':  { dominance: 1, submission: -1 },
+  '3':  { dominance: 1, submission: -1, sensory: 1 },
+  '4':  { dominance: 1, submission: -1, psychological: 1 },
+  '5':  { sadism: 1, masochism: -1, psychological: 1 },
+  '6':  { dominance: 1, submission: -1 },
+  '7':  { dominance: 1, psychological: 1 },
+  '8':  { dominance: 1, submission: -1, sadism: 1 },
+  '9':  { dominance: 1, sadism: 1, masochism: -1 },
+  '10': { dominance: 1, sensory: 1 },
+  '11': { dominance: 1, sadism: 1 },
+  '12': { dominance: 1, submission: -1 },
+  '13': { dominance: 1, submission: -1 },
+  '14': { dominance: 1, sadism: 1 },
+  '15': { dominance: 1, submission: -1, psychological: 1 },
+  // Q16-30: 服従・被虐
+  '16': { submission: 1, dominance: -1 },
+  '17': { submission: 1, dominance: -1, psychological: 1 },
+  '18': { submission: 1, dominance: -1 },
+  '19': { submission: 1, dominance: -1, masochism: 1 },
+  '20': { submission: 1, dominance: -1 },
+  '21': { submission: 1, dominance: -1 },
+  '22': { submission: 1, dominance: -1 },
+  '23': { submission: 1, masochism: 1, sadism: -1 },
+  '24': { submission: 1, masochism: 1, sadism: -1 },
+  '25': { submission: 1, masochism: 1 },
+  '26': { submission: 1, dominance: -1, sensory: 1 },
+  '27': { submission: 1, sensory: 1 },
+  '28': { submission: 1, masochism: 1 },
+  '29': { submission: 1, masochism: 1, sadism: -1 },
+  '30': { submission: 1, dominance: -1, psychological: 1 },
+}
+// Q31-40: 心理戦。Q39のみ dominance/submission コントラスト追加
 for (let i = 31; i <= 40; i++) DEFAULT_P1_SCORES[String(i)] = { psychological: 1 }
-// Q41–Q50: 五感・音・質感・気配 → Sensory +1
+DEFAULT_P1_SCORES['39'] = { psychological: 1, dominance: 1, submission: -1 }
+// Q41-50: 五感。Q47のみ submission/dominance コントラスト追加
 for (let i = 41; i <= 50; i++) DEFAULT_P1_SCORES[String(i)] = { sensory: 1 }
+DEFAULT_P1_SCORES['47'] = { sensory: 1, submission: 1, dominance: -1 }
 
 // Phase 2 スコアテーブル (AxisScores外の care は別途管理)
 const DEFAULT_P2_SCORES: Record<string, Record<string, ScoreDelta>> = {
   '1': {
-    'A': { submission: 3 },
-    'B': { dominance: 3 },
+    'A': { submission: 3, dominance: -2 },
+    'B': { dominance: 3, submission: -2 },
     'C': { psychological: 3 },
-    'D': { dominance: 1, submission: 1 },
+    'D': { submission: 1, dominance: -1, psychological: 1 },
   },
   '2': {
-    'A': { psychological: 2, sensory: 1 },
-    'B': { masochism: 3 },
-    'C': { psychological: 3 },
-    'D': { dominance: 3, sadism: 1 },
+    'A': { psychological: 3, masochism: -1 },
+    'B': { masochism: 3, sadism: -2, dominance: -1 },
+    'C': { psychological: 3, sensory: 1 },
+    'D': { sadism: 3, dominance: 1, masochism: -2 },
   },
   '3': {
-    'A': { submission: 3, masochism: 1 },
-    'B': { dominance: 3 },
-    'C': { psychological: 3 },
-    'D': { psychological: 3 },
+    'A': { submission: 3, dominance: -2, masochism: 1 },
+    'B': { dominance: 3, submission: -2 },
+    'C': { sensory: 3, psychological: 1 },
+    'D': { psychological: 3, dominance: 1 },
   },
   '4': {
-    'A': { sadism: 3 },
-    'B': { masochism: 3 },
+    'A': { sadism: 3, masochism: -2, submission: -1 },
+    'B': { masochism: 3, sadism: -2, dominance: -1 },
     'C': { psychological: 3 },
-    'D': { dominance: 3 },
+    'D': { dominance: 3, submission: -2 },
   },
   '5': {
-    'A': { dominance: 3 },
-    'B': { submission: 3 },
+    'A': { dominance: 3, submission: -2 },
+    'B': { submission: 3, dominance: -2 },
     'C': { psychological: 3 },
-    'D': { dominance: 2, psychological: 2 },
+    'D': { dominance: 2, psychological: 2, submission: -1 },
   },
   '6': {
-    'A': { submission: 3 },
-    'B': { dominance: 3 },   // care +2 は careScore で別管理
-    'C': { psychological: 3 },
+    'A': { submission: 3, dominance: -2 },
+    'B': { dominance: 3, submission: -2 },   // care +2 は careScore で別管理
+    'C': { psychological: 3, sensory: 1 },
     'D': { psychological: 2, dominance: 1 },
   },
 }
@@ -111,10 +137,10 @@ function addDelta(raw: AxisScores, delta: ScoreDelta, weight = 1): void {
 }
 
 function normalize(raw: AxisScores): AxisScores {
-  const max = Math.max(...AXIS_KEYS.map((k) => raw[k]), 1)
+  const max = Math.max(...AXIS_KEYS.map((k) => Math.max(0, raw[k])), 1)
   const result = initScores()
   for (const key of AXIS_KEYS) {
-    result[key] = Math.round((raw[key] / max) * 100)
+    result[key] = Math.round((Math.max(0, raw[key]) / max) * 100)
   }
   return result
 }
