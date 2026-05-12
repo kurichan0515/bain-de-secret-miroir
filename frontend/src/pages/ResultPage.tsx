@@ -40,24 +40,25 @@ function SectionLabel({ children }: { children: string }) {
 export default function ResultPage() {
   const navigate = useNavigate()
   const { result, reset } = useAnswerStore()
-  const [imageState, setImageState] = useState<'idle' | 'generating' | 'done'>('idle')
+  const [shareState, setShareState] = useState<'idle' | 'generating' | 'done'>('idle')
+  const [saveState, setSaveState] = useState<'idle' | 'generating' | 'done'>('idle')
 
-  const handleSaveImage = useCallback(async () => {
-    if (!result || imageState === 'generating') return
-    setImageState('generating')
+  const generateImage = useCallback(async () => {
+    if (!result) return null
+    return await generateShareImage(result)
+  }, [result])
+
+  const handleShareX = useCallback(async () => {
+    if (!result || shareState === 'generating') return
+    setShareState('generating')
+    const shareText = `【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n相性タイプ:「${result.compatible_type}」\n\n${result.catchphrase}\n\n#BainDeSecretMiroir #${result.type_name} #${result.compatible_type}`
     try {
-      const blob = await generateShareImage(result)
+      const blob = await generateImage()
+      if (!blob) throw new Error()
       const file = new File([blob], 'bain-de-secret-miroir.png', { type: 'image/png' })
 
-      if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({ files: [file] })
-      ) {
-        await navigator.share({
-          files: [file],
-          title: `Bain de Secret Miroir — ${result.type_name}`,
-        })
+      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], text: shareText })
       } else {
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
@@ -65,12 +66,32 @@ export default function ResultPage() {
         a.download = 'bain-de-secret-miroir.png'
         a.click()
         URL.revokeObjectURL(url)
+        const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(window.location.origin)}`
+        window.open(twitterUrl, '_blank')
       }
-      setImageState('done')
+      setShareState('done')
     } catch {
-      setImageState('idle')
+      setShareState('idle')
     }
-  }, [result, imageState])
+  }, [result, shareState, generateImage])
+
+  const handleSaveImage = useCallback(async () => {
+    if (!result || saveState === 'generating') return
+    setSaveState('generating')
+    try {
+      const blob = await generateImage()
+      if (!blob) throw new Error()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'bain-de-secret-miroir.png'
+      a.click()
+      URL.revokeObjectURL(url)
+      setSaveState('done')
+    } catch {
+      setSaveState('idle')
+    }
+  }, [result, saveState, generateImage])
 
   if (!result) {
     return (
@@ -101,11 +122,6 @@ export default function ResultPage() {
     )
   }
 
-  const shareText = encodeURIComponent(
-    `【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n相性タイプ:「${result.compatible_type}」\n\n${result.catchphrase}\n\n#BainDeSecretMiroir #${result.type_name} #${result.compatible_type}`
-  )
-  const shareUrl = encodeURIComponent(window.location.origin)
-
   const handleRetry = () => {
     reset()
     navigate('/')
@@ -128,17 +144,22 @@ export default function ResultPage() {
             style={{
               background: 'linear-gradient(160deg, #0A0E14 0%, #1A2B48 100%)',
               boxShadow: '0 0 60px rgba(26, 43, 72, 0.5)',
+              border: '1px solid rgba(255,255,255,0.1)',
             }}
           >
-            <p
-              className="text-xs tracking-widest mb-6 text-center"
-              style={{ color: 'rgba(184, 197, 214, 0.5)', fontFamily: 'Cinzel, serif' }}
-            >
-              Your Type
-            </p>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div style={{ height: '1px', flex: 1, background: 'rgba(255,255,255,0.08)' }} />
+              <p
+                className="text-xs tracking-widest"
+                style={{ color: 'rgba(184, 197, 214, 0.5)', fontFamily: 'Cinzel, serif', whiteSpace: 'nowrap' }}
+              >
+                あなたのタイプ
+              </p>
+              <div style={{ height: '1px', flex: 1, background: 'rgba(255,255,255,0.08)' }} />
+            </div>
 
             <h1
-              className="text-2xl text-center mb-6 leading-relaxed text-balance"
+              className="text-2xl text-center mb-4 leading-relaxed"
               style={{
                 fontFamily: 'Shippori Mincho, serif',
                 fontWeight: 300,
@@ -151,9 +172,9 @@ export default function ResultPage() {
             </h1>
 
             <p
-              className="text-sm text-center italic text-pretty"
+              className="text-sm text-center italic"
               style={{
-                color: 'rgba(184, 197, 214, 0.7)',
+                color: 'rgba(184, 197, 214, 0.6)',
                 fontFamily: 'Shippori Mincho, serif',
                 lineHeight: '1.9',
               }}
@@ -201,22 +222,25 @@ export default function ResultPage() {
 
         {/* ── 相性タイプカード ── */}
         <motion.div className="px-2" variants={itemVariants}>
-          <SectionLabel>Compatible Type</SectionLabel>
           <div
             className="p-6"
             style={{
-              border: '1px solid rgba(26,43,72,0.6)',
-              background: 'rgba(26,43,72,0.12)',
+              border: '1px solid rgba(100,140,220,0.25)',
+              background: 'rgba(26,43,72,0.18)',
             }}
           >
+            <div className="flex items-center gap-3 mb-4">
+              <div style={{ height: '1px', flex: 1, background: 'rgba(100,140,220,0.15)' }} />
+              <p
+                className="text-xs tracking-widest"
+                style={{ color: 'rgba(100,140,220,0.6)', fontFamily: 'Cinzel, serif', whiteSpace: 'nowrap' }}
+              >
+                最も相性のいいタイプ
+              </p>
+              <div style={{ height: '1px', flex: 1, background: 'rgba(100,140,220,0.15)' }} />
+            </div>
             <p
-              className="text-xs tracking-widest mb-3"
-              style={{ color: 'rgba(100,140,220,0.5)', fontFamily: 'Cinzel, serif' }}
-            >
-              Most Compatible
-            </p>
-            <p
-              className="text-xl mb-4"
+              className="text-xl mb-3 text-center"
               style={{
                 fontFamily: 'Shippori Mincho, serif',
                 fontWeight: 300,
@@ -226,14 +250,14 @@ export default function ResultPage() {
               {result.compatible_type}
             </p>
             <p
-              className="text-xs text-pretty"
+              className="text-xs text-center"
               style={{
                 fontFamily: 'Shippori Mincho, serif',
                 lineHeight: '1.9',
-                color: 'rgba(184,197,214,0.55)',
+                color: 'rgba(184,197,214,0.45)',
               }}
             >
-              あなたの深淵を最も深く理解し、共鳴できる存在。互いの影が重なることで、はじめて完全な像が結ばれる。
+              あなたの深淵を最も深く理解し、共鳴できる存在。
             </p>
           </div>
         </motion.div>
@@ -263,56 +287,37 @@ export default function ResultPage() {
         {/* ── アクション ── */}
         <motion.div className="flex flex-col gap-3 px-2" variants={itemVariants}>
 
-          {/* 画像保存 */}
+          {/* X 投稿（画像付き） */}
           <button
-            onClick={handleSaveImage}
-            disabled={imageState === 'generating'}
+            onClick={handleShareX}
+            disabled={shareState === 'generating'}
             className="flex items-center justify-center py-4 text-sm tracking-widest"
             style={{
-              border: '1px solid rgba(100,140,220,0.3)',
-              background: imageState === 'done'
-                ? 'rgba(26,43,72,0.3)'
-                : 'transparent',
-              color: imageState === 'generating'
-                ? 'rgba(184, 197, 214, 0.3)'
-                : 'rgba(100,140,220,0.8)',
-              cursor: imageState === 'generating' ? 'default' : 'pointer',
+              border: '1px solid rgba(255,255,255,0.2)',
+              background: shareState === 'done' ? 'rgba(255,255,255,0.05)' : 'transparent',
+              color: shareState === 'generating' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.85)',
+              cursor: shareState === 'generating' ? 'default' : 'pointer',
               fontFamily: 'Cinzel, serif',
             }}
           >
-            {imageState === 'generating'
-              ? 'Generating...'
-              : imageState === 'done'
-              ? 'Image Saved'
-              : 'Save Diagnosis Card'}
+            {shareState === 'generating' ? 'Generating...' : shareState === 'done' ? 'Shared ✓' : 'X に投稿する（画像付き）'}
           </button>
 
-          <p
-            className="text-xs text-center"
+          {/* 画像だけ保存 */}
+          <button
+            onClick={handleSaveImage}
+            disabled={saveState === 'generating'}
+            className="flex items-center justify-center py-3 text-xs tracking-widest"
             style={{
-              fontFamily: 'Shippori Mincho, serif',
-              color: 'rgba(184, 197, 214, 0.3)',
-              lineHeight: '1.6',
-            }}
-          >
-            画像を保存して、X投稿に添付できます
-          </p>
-
-          {/* X 共有 */}
-          <a
-            href={`https://x.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center py-4 text-sm tracking-widest"
-            style={{
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: 'rgba(255,255,255,0.7)',
+              border: '1px solid rgba(100,140,220,0.2)',
+              background: 'transparent',
+              color: saveState === 'generating' ? 'rgba(100,140,220,0.3)' : 'rgba(100,140,220,0.6)',
+              cursor: saveState === 'generating' ? 'default' : 'pointer',
               fontFamily: 'Cinzel, serif',
-              textDecoration: 'none',
             }}
           >
-            Share on X
-          </a>
+            {saveState === 'generating' ? 'Generating...' : saveState === 'done' ? 'Saved ✓' : '診断カードを保存'}
+          </button>
 
           <button
             onClick={handleRetry}
