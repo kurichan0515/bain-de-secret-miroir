@@ -154,7 +154,7 @@ function QuestionForm({
           }}
           whileHover={isValid ? { backgroundColor: glowColor } : {}}
         >
-          {index + 1 >= total ? '解析へ進む' : '次へ'}
+          {index + 1 >= total ? '解析へ進む' : '最後の問いへ'}
         </motion.button>
       </div>
     </motion.div>
