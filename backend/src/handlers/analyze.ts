@@ -44,17 +44,17 @@ export const handler = async (
     const validationError = validate(body)
     if (validationError) return error(400, validationError)
 
-    const { phase1Answers, phase2Answers, phase3Answers } = body as AnalyzeRequest
+    const { phase1Answers, phase2Answers, phase3Answers, questionSet } = body as AnalyzeRequest
 
     const phase3Texts: Phase3Texts = {
       question1: phase3Answers['1'] ?? '',
       question2: phase3Answers['2'] ?? '',
     }
 
-    const scores = calculateScores(phase1Answers, phase2Answers)
-    const diagnosis = await generateDiagnosis(scores, phase2Answers, phase3Texts)
+    const { scores, careScore } = calculateScores(phase1Answers, phase2Answers, questionSet ?? 'bdsm')
+    const diagnosis = await generateDiagnosis(scores, phase2Answers, phase3Texts, careScore)
 
-    return ok({ ...diagnosis, axis_scores: scores })
+    return ok(diagnosis)
   } catch (err) {
     console.error('Handler error:', err)
     return error(500, '診断の生成中にエラーが発生しました。')

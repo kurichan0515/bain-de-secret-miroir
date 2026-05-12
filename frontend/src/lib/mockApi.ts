@@ -1,29 +1,19 @@
 import type { DiagnosisResult } from '../types'
 
 const MOCK_RESULT: DiagnosisResult = {
-  type_name: '静寂なる支配の観察者',
-  type_name_en: 'Silent Dominance Observer',
+  type_name: '静寂なる傀儡師',
   catchphrase: 'あなたの瞳は、冷たいガラス越しにのみ熱を帯びる。',
   description:
-    'あなたは言葉少なく、視線で相手を縛る。心理的な距離を保ちながら、相手の内面を完璧に把握することに喜びを感じる。物理的な拘束よりも、精神的な支配に美学を見出す稀有な存在。その静けさの奥に、深く燃える意志がある。',
-  core_attributes: ['心理的支配', '視線への執着', '静かなる観察'],
-  dominant_axis: 'psychological',
-  secondary_axis: 'voyeurism',
-  sensory_preference: 'visual',
-  compatible_type: '深淵の探求者',
-  partner_advice: 'あなたの静かな視線に身を委ねられる、繊細な魂を求めています。',
-  axis_scores: {
-    dominance: 72,
-    submission: 20,
-    bondage: 45,
-    discipline: 58,
-    sadism: 35,
-    masochism: 15,
-    psychological: 100,
-    sensory: 60,
-    exhibitionism: 18,
-    voyeurism: 85,
+    'あなたは日常では言葉少なく穏やかな観察者として振る舞うが、深層心理では視線と沈黙で相手を操ることを渇望している。物理的な接触よりも、精神的な逃げ道を塞ぐことに美学を見出す稀有な存在だ。その静けさの奥に、冷徹な支配の意志が宿っている。',
+  radar_scores: {
+    Dominance: 72,
+    Submission: 20,
+    Sadism: 35,
+    Masochism: 15,
+    Psychological: 100,
   },
+  specific_traits: ['心理的支配', '視線への執着', '静かなる観察'],
+  compatible_type: '深淵の探求者',
 }
 
 export async function mockAnalyze(): Promise<DiagnosisResult> {

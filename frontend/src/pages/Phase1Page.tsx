@@ -1,13 +1,14 @@
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAnswerStore } from '../store/useAnswerStore'
-import phase1Data from '../../../data/phase1.json'
+import phase1DataBdsm from '../../../data/question-sets/bdsm/phase1.json'
+import phase1DataDefault from '../../../data/question-sets/default/phase1.json'
 
 interface QuestionItem {
   id: number
   text: string
-  category: 'dominant' | 'submissive' | 'voyeuristic' | 'sensory'
+  category: 'dominant' | 'submissive' | 'voyeuristic' | 'sensory' | 'active' | 'passive' | 'observer'
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -19,32 +20,20 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-// モジュール読み込み時に1回だけシャッフル（セッション中は順番固定）
-const questions: QuestionItem[] = shuffle(phase1Data.questions as QuestionItem[])
-
-// カテゴリごとのラベル・ボーダー色
-const CATEGORY_CONFIG = {
-  dominant: {
-    label: 'Action',
-    border: 'rgba(150, 20, 20, 0.75)',    // 赤黒
-    glow: 'rgba(150, 20, 20, 0.2)',
-  },
-  submissive: {
-    label: 'Receive',
-    border: 'rgba(26, 43, 72, 0.9)',       // 深い紺
-    glow: 'rgba(26, 43, 72, 0.4)',
-  },
-  voyeuristic: {
-    label: 'Observe',
-    border: 'rgba(80, 60, 120, 0.7)',      // 妖しい紫
-    glow: 'rgba(80, 60, 120, 0.25)',
-  },
-  sensory: {
-    label: 'Sense',
-    border: 'rgba(100, 80, 50, 0.6)',      // 琥珀
-    glow: 'rgba(100, 80, 50, 0.2)',
-  },
+// カテゴリ色はドラッグ選択時のエフェクトにのみ使用
+const CATEGORY_EFFECT: Record<string, { border: string; glow: string; label: string }> = {
+  dominant:     { border: 'rgba(160, 30, 30, 0.85)',   glow: 'rgba(150, 20, 20, 0.35)',   label: 'Action' },
+  submissive:   { border: 'rgba(26, 60, 100, 0.9)',    glow: 'rgba(26, 43, 72, 0.45)',    label: 'Receive' },
+  voyeuristic:  { border: 'rgba(90, 65, 135, 0.75)',   glow: 'rgba(80, 60, 120, 0.3)',    label: 'Observe' },
+  sensory:      { border: 'rgba(110, 85, 50, 0.7)',    glow: 'rgba(100, 80, 50, 0.25)',   label: 'Sense' },
+  active:       { border: 'rgba(160, 30, 30, 0.85)',   glow: 'rgba(150, 20, 20, 0.35)',   label: 'Lead' },
+  passive:      { border: 'rgba(26, 60, 100, 0.9)',    glow: 'rgba(26, 43, 72, 0.45)',    label: 'Follow' },
+  observer:     { border: 'rgba(90, 65, 135, 0.75)',   glow: 'rgba(80, 60, 120, 0.3)',    label: 'Watch' },
 }
+
+const NEUTRAL_BORDER = 'rgba(255, 255, 255, 0.08)'
+const NEUTRAL_BG = 'linear-gradient(160deg, #0A0E14 0%, #1A2B48 100%)'
+const DARK_BG = 'linear-gradient(160deg, #060810 0%, #0D1520 100%)'
 
 const cardVariants: Variants = {
   enter: { opacity: 0, y: 60, scale: 0.95 },
@@ -68,13 +57,40 @@ const floatingVariants: Variants = {
 export default function Phase1Page() {
   const navigate = useNavigate()
   const setPhase1Answer = useAnswerStore((s) => s.setPhase1Answer)
+  const questionSet = useAnswerStore((s) => s.questionSet)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
   const [dragX, setDragX] = useState(0)
 
+  const questions: QuestionItem[] = useMemo(() => {
+    const data = questionSet === 'bdsm' ? phase1DataBdsm : phase1DataDefault
+    return shuffle(data.questions as QuestionItem[])
+  }, [questionSet])
+
   const currentQuestion = questions[currentIndex]
-  const config = CATEGORY_CONFIG[currentQuestion.category]
+  const effect = CATEGORY_EFFECT[currentQuestion.category]
   const progress = currentIndex / questions.length
+
+  // ドラッグ強度（0〜1）
+  const yesIntensity = Math.min(1, Math.max(0, dragX / 160))
+  const noIntensity = Math.min(1, Math.max(0, -dragX / 160))
+  const isDraggingYes = dragX > 20
+  const isDraggingNo = dragX < -20
+
+  // 動的スタイル計算
+  const cardBorderColor = isDraggingYes
+    ? effect.border
+    : isDraggingNo
+    ? `rgba(255,255,255,${0.08 - noIntensity * 0.06})`
+    : NEUTRAL_BORDER
+
+  const cardBoxShadow = isDraggingYes
+    ? `0 0 ${Math.floor(30 + yesIntensity * 50)}px ${effect.glow}`
+    : 'none'
+
+  const cardBackground = isDraggingNo
+    ? DARK_BG
+    : NEUTRAL_BG
 
   const answer = useCallback(
     (value: boolean) => {
@@ -91,7 +107,7 @@ export default function Phase1Page() {
 
   return (
     <div className="flex flex-col items-center min-h-svh px-4 py-8" style={{ background: '#05070A' }}>
-      {/* プログレスバー */}
+      {/* プログレスバー — 常にニュートラル */}
       <div className="w-full max-w-sm mb-8">
         <div className="flex justify-between text-xs mb-2" style={{ color: 'rgba(184, 197, 214, 0.5)', fontFamily: 'Cinzel, serif' }}>
           <span>Phase I</span>
@@ -100,7 +116,7 @@ export default function Phase1Page() {
         <div className="w-full h-px" style={{ background: 'rgba(255,255,255,0.08)' }}>
           <motion.div
             className="h-full"
-            style={{ background: config.border }}
+            style={{ background: 'rgba(184, 197, 214, 0.35)' }}
             animate={{ width: `${progress * 100}%` }}
             transition={{ duration: 0.4 }}
           />
@@ -130,54 +146,71 @@ export default function Phase1Page() {
             style={{
               width: 'min(90vw, 400px)',
               height: '500px',
-              background: 'linear-gradient(160deg, #0A0E14 0%, #1A2B48 100%)',
-              border: `1px solid ${config.border}`,
-              boxShadow: `0 0 40px ${config.glow}`,
+              background: cardBackground,
+              border: `1px solid ${cardBorderColor}`,
+              boxShadow: cardBoxShadow,
               borderRadius: '2px',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '2.5rem',
+              padding: '2.5rem 1.5rem',
               cursor: 'grab',
               userSelect: 'none',
               position: 'relative',
+              transition: 'background 0.2s',
             }}
           >
-            {/* カテゴリラベル */}
-            <div
-              className="absolute top-5 right-5 text-xs tracking-widest px-2 py-1"
-              style={{
-                color: config.border,
-                border: `1px solid ${config.border}`,
-                fontFamily: 'Cinzel, serif',
-                fontSize: '9px',
-                letterSpacing: '0.15em',
-              }}
-            >
-              {config.label}
-            </div>
-
             {/* 問題番号 */}
-            <p className="absolute top-5 left-5 text-xs tracking-widest" style={{ color: 'rgba(184, 197, 214, 0.4)', fontFamily: 'Cinzel, serif' }}>
+            <p
+              className="absolute top-5 left-5 text-xs tracking-widest"
+              style={{ color: 'rgba(184, 197, 214, 0.4)', fontFamily: 'Cinzel, serif' }}
+            >
               {String(currentIndex + 1).padStart(2, '0')}
             </p>
 
+            {/* ドラッグ方向エフェクト — YES側：カテゴリカラーラベル */}
+            <AnimatePresence>
+              {isDraggingYes && (
+                <motion.div
+                  className="absolute top-5 right-5 text-xs tracking-widest px-2 py-1"
+                  style={{
+                    color: effect.border,
+                    border: `1px solid ${effect.border}`,
+                    fontFamily: 'Cinzel, serif',
+                    fontSize: '9px',
+                    letterSpacing: '0.15em',
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: yesIntensity, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  {effect.label}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* 問題文 */}
             <motion.div variants={floatingVariants} animate="animate" style={{ textAlign: 'center' }}>
-              <p
+              <div
                 className="font-light"
                 style={{
                   fontFamily: 'Shippori Mincho, serif',
-                  fontSize: 'clamp(0.85rem, 3.8vw, 1rem)',
+                  fontSize: 'clamp(0.8rem, 3.5vw, 0.95rem)',
                   lineHeight: '2.2',
-                  wordBreak: 'keep-all',
-                  overflowWrap: 'anywhere',
                   textAlign: 'center',
                 }}
               >
-                {currentQuestion.text}
-              </p>
+                {currentQuestion.text
+                  .split('\n')
+                  .flatMap((line, li) => {
+                    const parts = line.split('、')
+                    return parts.map((p, i) => (
+                      <div key={`${li}-${i}`}>{i < parts.length - 1 ? p + '、' : p}</div>
+                    ))
+                  })}
+              </div>
             </motion.div>
 
             {/* スワイプヒント */}
@@ -190,20 +223,21 @@ export default function Phase1Page() {
               <span>惹かれる →</span>
             </motion.div>
 
-            {/* スワイプ中のラベル */}
+            {/* ドラッグ中ラベル YES */}
             {dragX > 20 && (
               <motion.div
                 className="absolute top-6 right-14 text-xs tracking-widest"
-                style={{ color: config.border, fontFamily: 'Cinzel, serif' }}
+                style={{ color: effect.border, fontFamily: 'Cinzel, serif' }}
                 animate={{ opacity: Math.min(dragX / 150, 1) }}
               >
                 YES
               </motion.div>
             )}
+            {/* ドラッグ中ラベル NO */}
             {dragX < -20 && (
               <motion.div
                 className="absolute top-6 left-14 text-xs tracking-widest"
-                style={{ color: 'rgba(184, 197, 214, 0.7)', fontFamily: 'Cinzel, serif' }}
+                style={{ color: 'rgba(184, 197, 214, 0.5)', fontFamily: 'Cinzel, serif' }}
                 animate={{ opacity: Math.min(Math.abs(dragX) / 150, 1) }}
               >
                 NO
@@ -213,15 +247,15 @@ export default function Phase1Page() {
         </AnimatePresence>
       </div>
 
-      {/* ボタン */}
+      {/* ボタン — 常にニュートラル */}
       <div className="flex gap-8 mt-8">
         <button
           onClick={() => answer(false)}
           className="flex items-center justify-center w-16 h-16 rounded-full text-sm"
           style={{
-            border: '1px solid rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.12)',
             background: 'transparent',
-            color: 'rgba(184, 197, 214, 0.7)',
+            color: 'rgba(184, 197, 214, 0.6)',
             cursor: 'pointer',
             fontFamily: 'Cinzel, serif',
           }}
@@ -232,8 +266,8 @@ export default function Phase1Page() {
           onClick={() => answer(true)}
           className="flex items-center justify-center w-16 h-16 rounded-full text-sm"
           style={{
-            border: `1px solid ${config.border}`,
-            background: config.glow,
+            border: '1px solid rgba(255,255,255,0.25)',
+            background: 'rgba(255,255,255,0.05)',
             color: '#FFFFFF',
             cursor: 'pointer',
             fontFamily: 'Cinzel, serif',

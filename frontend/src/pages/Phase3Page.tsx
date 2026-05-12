@@ -3,7 +3,8 @@ import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAnswerStore } from '../store/useAnswerStore'
 import { calcTendency } from '../lib/tendency'
-import phase3Data from '../../../data/phase3.json'
+import phase3DataBdsm from '../../../data/question-sets/bdsm/phase3.json'
+import phase3DataDefault from '../../../data/question-sets/default/phase3.json'
 
 type Tendency = 'dominant' | 'submissive' | 'switch'
 
@@ -16,10 +17,10 @@ interface Question {
   max_length: number
 }
 
-const QUESTIONS: Record<Tendency, Question[]> = {
-  dominant:   phase3Data.dominant_questions as Question[],
-  submissive: phase3Data.submissive_questions as Question[],
-  switch:     phase3Data.switch_questions as Question[],
+type Phase3Data = {
+  dominant_questions: Question[]
+  submissive_questions: Question[]
+  switch_questions: Question[]
 }
 
 const BORDER_COLOR: Record<Tendency, string> = {
@@ -90,14 +91,12 @@ function QuestionForm({
             className="text-sm font-light"
             style={{
               fontFamily: 'Shippori Mincho, serif',
-              lineHeight: '2.2',
-              wordBreak: 'keep-all',
-              overflowWrap: 'anywhere',
+              lineHeight: '2',
+              whiteSpace: 'pre-line',
+              overflowWrap: 'break-word',
             }}
           >
-            {question.prompt.split('\n').map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 && <><br /><br /></>}</span>
-            ))}
+            {question.prompt}
           </p>
         </div>
 
@@ -165,13 +164,23 @@ function QuestionForm({
 // ─── メインコンポーネント ──────────────────────────────────
 export default function Phase3Page() {
   const navigate = useNavigate()
-  const { phase1Answers, phase2Answers, setPhase3Answer } = useAnswerStore()
+  const { phase1Answers, phase2Answers, setPhase3Answer, questionSet } = useAnswerStore()
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const tendency: Tendency = useMemo(
-    () => calcTendency(phase1Answers, phase2Answers),
-    [phase1Answers, phase2Answers]
+    () => calcTendency(phase1Answers, phase2Answers, questionSet),
+    [phase1Answers, phase2Answers, questionSet]
   )
+
+  const data = useMemo<Phase3Data>(() => {
+    return (questionSet === 'bdsm' ? phase3DataBdsm : phase3DataDefault) as Phase3Data
+  }, [questionSet])
+
+  const QUESTIONS: Record<Tendency, Question[]> = useMemo(() => ({
+    dominant:   data.dominant_questions,
+    submissive: data.submissive_questions,
+    switch:     data.switch_questions,
+  }), [data])
 
   const questions = QUESTIONS[tendency]
 

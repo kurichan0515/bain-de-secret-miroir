@@ -1,8 +1,9 @@
 import { motion, AnimatePresence, type Variants } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAnswerStore } from '../store/useAnswerStore'
-import phase2Data from '../../../data/phase2.json'
+import phase2DataBdsm from '../../../data/question-sets/bdsm/phase2.json'
+import phase2DataDefault from '../../../data/question-sets/default/phase2.json'
 
 interface Choice {
   id: string
@@ -18,8 +19,6 @@ interface Question {
   choices: Choice[]
 }
 
-const questions: Question[] = phase2Data.questions as Question[]
-
 const rippleVariants: Variants = {
   initial: { scale: 0, opacity: 0.6 },
   animate: {
@@ -32,9 +31,15 @@ const rippleVariants: Variants = {
 export default function Phase2Page() {
   const navigate = useNavigate()
   const setPhase2Answer = useAnswerStore((s) => s.setPhase2Answer)
+  const questionSet = useAnswerStore((s) => s.questionSet)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [hoveredChoice, setHoveredChoice] = useState<string | null>(null)
   const [ripple, setRipple] = useState<{ x: number; y: number; key: number } | null>(null)
+
+  const questions: Question[] = useMemo(() => {
+    const data = questionSet === 'bdsm' ? phase2DataBdsm : phase2DataDefault
+    return data.questions as Question[]
+  }, [questionSet])
 
   const current = questions[currentIndex]
   const progress = currentIndex / questions.length
@@ -103,13 +108,12 @@ export default function Phase2Page() {
               {current.title}
             </h2>
             <p
-              className="text-sm leading-loose"
+              className="text-sm"
               style={{
                 color: 'rgba(184, 197, 214, 0.75)',
                 lineHeight: '2',
                 fontFamily: 'Shippori Mincho, serif',
-                wordBreak: 'keep-all',
-                overflowWrap: 'anywhere',
+                overflowWrap: 'break-word',
               }}
             >
               {current.scenario}
@@ -126,7 +130,7 @@ export default function Phase2Page() {
                   onMouseLeave={() => setHoveredChoice(null)}
                   onTouchStart={() => setHoveredChoice(choice.id)}
                   onTouchEnd={() => setHoveredChoice(null)}
-                  className="w-full text-left px-5 py-4 text-sm relative"
+                  className="w-full text-left px-5 py-4 text-xs relative"
                   style={{
                     background: hoveredChoice === choice.id
                       ? 'rgba(26, 43, 72, 0.55)'
@@ -150,7 +154,7 @@ export default function Phase2Page() {
                   >
                     {choice.id}
                   </span>
-                  <span style={{ wordBreak: 'keep-all', overflowWrap: 'anywhere' }}>{choice.text}</span>
+                  <span style={{ overflowWrap: 'break-word' }}>{choice.text}</span>
 
                   {/* ホバータグ */}
                   <AnimatePresence>

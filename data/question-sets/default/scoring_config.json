@@ -1,0 +1,121 @@
+{
+  "scoring_config": {
+    "phase1_weight": 1,
+    "phase2_weight": 2,
+    "phase3_weight": 3,
+    "axes": {
+      "dominance": {
+        "label": "Dominance（主導）",
+        "abbreviation": "D",
+        "description": "相手を導き、関係性の主導権を握ることへの欲求",
+        "color": "#8B0000"
+      },
+      "submission": {
+        "label": "Submission（委ね）",
+        "abbreviation": "S",
+        "description": "意思を預け、導かれることへの安堵と解放感",
+        "color": "#00008B"
+      },
+      "psychological": {
+        "label": "Psychological（心理）",
+        "abbreviation": "P",
+        "description": "言葉と沈黙による駆け引きへの深い関心",
+        "color": "#191970"
+      },
+      "sensory": {
+        "label": "Sensory（感覚）",
+        "abbreviation": "Se",
+        "description": "五感を通じた繊細な刺激と空間への鋭敏さ",
+        "color": "#6A5ACD"
+      },
+      "voyeurism": {
+        "label": "Voyeurism（観察）",
+        "abbreviation": "V",
+        "description": "相手を観察し、秘密を知ることへの欲求",
+        "color": "#483D8B"
+      },
+      "exhibitionism": {
+        "label": "Exhibitionism（秘密）",
+        "abbreviation": "E",
+        "description": "二人だけの秘密を持つことへの甘い高揚感",
+        "color": "#DC143C"
+      },
+      "bondage": {
+        "label": "Bondage（拘束感）",
+        "abbreviation": "B",
+        "description": "物理的・心理的な制約に感じる安心と緊張",
+        "color": "#2F4F4F"
+      },
+      "discipline": {
+        "label": "Discipline（秩序）",
+        "abbreviation": "Di",
+        "description": "ルールと約束による関係性の安定への欲求",
+        "color": "#4B0082"
+      },
+      "masochism": {
+        "label": "Masochism（被受容）",
+        "abbreviation": "M",
+        "description": "冷たさや厳しさの中に愛を見出す感受性",
+        "color": "#FF1493"
+      }
+    }
+  },
+  "result_types": {
+    "silent_conductor": {
+      "name": "静かなる指揮者",
+      "name_en": "Silent Conductor",
+      "description": "言葉より行動で空間を支配する、静かで確かな主導者",
+      "traits": ["高いDominance", "高いPsychological", "低いSensory"],
+      "compatible_types": ["mirror_of_trust", "devoted_passenger"]
+    },
+    "devoted_passenger": {
+      "name": "信頼の旅人",
+      "name_en": "Devoted Passenger",
+      "description": "誰かの地図を信じて歩むことで、深い安心を手に入れる魂",
+      "traits": ["高いSubmission", "中程度のSensory", "Trust重視"],
+      "compatible_types": ["silent_conductor", "tender_architect"]
+    },
+    "tender_architect": {
+      "name": "優しき設計者",
+      "name_en": "Tender Architect",
+      "description": "相手の好みを学び、その人だけのための世界を丁寧に作り上げる",
+      "traits": ["高いDominance", "高いPsychological", "高いSensory"],
+      "compatible_types": ["devoted_passenger", "mirror_of_trust"]
+    },
+    "mirror_of_trust": {
+      "name": "信頼の鏡",
+      "name_en": "Mirror of Trust",
+      "description": "相手の本音を映し出す、静かで誠実な受け手",
+      "traits": ["高いSubmission", "高いPsychological", "Voyeurism傾向"],
+      "compatible_types": ["silent_conductor", "tender_architect"]
+    },
+    "shadow_observer": {
+      "name": "影の観察者",
+      "name_en": "Shadow Observer",
+      "description": "日常の裏側に潜む緊張感を愛し、静かに相手を見つめる知性派",
+      "traits": ["高いVoyeurism", "高いPsychological", "低いDominance"],
+      "compatible_types": ["secret_keeper", "devoted_passenger"]
+    },
+    "secret_keeper": {
+      "name": "秘密の守り手",
+      "name_en": "Secret Keeper",
+      "description": "二人だけの世界を守ることで輝く、秘密の共犯者",
+      "traits": ["高いExhibitionism", "高いPsychological", "高いBondage"],
+      "compatible_types": ["shadow_observer", "mirror_of_trust"]
+    },
+    "sensory_poet": {
+      "name": "感覚の詩人",
+      "name_en": "Sensory Poet",
+      "description": "音と光と温度で世界を語る、五感の芸術家",
+      "traits": ["高いSensory", "中程度のPsychological", "高いAesthetic"],
+      "compatible_types": ["devoted_passenger", "mirror_of_trust"]
+    },
+    "gentle_sovereign": {
+      "name": "穏やかな主権者",
+      "name_en": "Gentle Sovereign",
+      "description": "厳しさと優しさを一本の糸で紡ぐ、バランスの取れた主導者",
+      "traits": ["バランス型", "高いDominance", "高いDiscipline"],
+      "compatible_types": ["devoted_passenger", "mirror_of_trust"]
+    }
+  }
+}

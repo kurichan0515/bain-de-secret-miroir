@@ -1,9 +1,11 @@
+import { useState, useCallback } from 'react'
 import { motion, type Variants } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAnswerStore } from '../store/useAnswerStore'
 import { AdBanner } from '../components/AdBanner'
 import { AxisChart } from '../components/AxisChart'
 import { TypeLandscape } from '../components/TypeLandscape'
+import { generateShareImage } from '../lib/generateShareImage'
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -38,6 +40,37 @@ function SectionLabel({ children }: { children: string }) {
 export default function ResultPage() {
   const navigate = useNavigate()
   const { result, reset } = useAnswerStore()
+  const [imageState, setImageState] = useState<'idle' | 'generating' | 'done'>('idle')
+
+  const handleSaveImage = useCallback(async () => {
+    if (!result || imageState === 'generating') return
+    setImageState('generating')
+    try {
+      const blob = await generateShareImage(result)
+      const file = new File([blob], 'bain-de-secret-miroir.png', { type: 'image/png' })
+
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({ files: [file] })
+      ) {
+        await navigator.share({
+          files: [file],
+          title: `Bain de Secret Miroir — ${result.type_name}`,
+        })
+      } else {
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'bain-de-secret-miroir.png'
+        a.click()
+        URL.revokeObjectURL(url)
+      }
+      setImageState('done')
+    } catch {
+      setImageState('idle')
+    }
+  }, [result, imageState])
 
   if (!result) {
     return (
@@ -69,7 +102,7 @@ export default function ResultPage() {
   }
 
   const shareText = encodeURIComponent(
-    `【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n\n${result.catchphrase}`
+    `【Bain de Secret Miroir】\n私の深層心理タイプは「${result.type_name}」\n相性タイプ:「${result.compatible_type}」\n\n${result.catchphrase}\n\n#BainDeSecretMiroir #${result.type_name} #${result.compatible_type}`
   )
   const shareUrl = encodeURIComponent(window.location.origin)
 
@@ -97,12 +130,6 @@ export default function ResultPage() {
               boxShadow: '0 0 60px rgba(26, 43, 72, 0.5)',
             }}
           >
-            <p
-              className="text-xs tracking-widest mb-1 text-center"
-              style={{ color: 'rgba(184, 197, 214, 0.35)', fontFamily: 'Cinzel, serif' }}
-            >
-              {result.type_name_en}
-            </p>
             <p
               className="text-xs tracking-widest mb-6 text-center"
               style={{ color: 'rgba(184, 197, 214, 0.5)', fontFamily: 'Cinzel, serif' }}
@@ -151,50 +178,73 @@ export default function ResultPage() {
           </p>
         </motion.div>
 
-        {/* ── 核となる属性 ── */}
-        {result.core_attributes.length > 0 && (
+        {/* ── 特徴的な傾向 ── */}
+        {result.specific_traits.length > 0 && (
           <motion.div className="mt-6 px-2" variants={itemVariants}>
-            <SectionLabel>Core Attributes</SectionLabel>
+            <SectionLabel>Core Traits</SectionLabel>
             <ul className="space-y-2">
-              {result.core_attributes.map((attr, i) => (
+              {result.specific_traits.map((trait, i) => (
                 <li
                   key={i}
                   className="text-sm flex items-start gap-3"
                   style={{ fontFamily: 'Shippori Mincho, serif', color: 'rgba(255,255,255,0.8)' }}
                 >
                   <span style={{ color: 'rgba(184, 197, 214, 0.4)' }}>—</span>
-                  {attr}
+                  {trait}
                 </li>
               ))}
             </ul>
           </motion.div>
         )}
 
-        {/* ── パートナーアドバイス ── */}
-        {result.partner_advice && (
-          <motion.div className="mt-6 px-2" variants={itemVariants}>
-            <SectionLabel>Partner Advice</SectionLabel>
+        <Divider />
+
+        {/* ── 相性タイプカード ── */}
+        <motion.div className="px-2" variants={itemVariants}>
+          <SectionLabel>Compatible Type</SectionLabel>
+          <div
+            className="p-6"
+            style={{
+              border: '1px solid rgba(26,43,72,0.6)',
+              background: 'rgba(26,43,72,0.12)',
+            }}
+          >
             <p
-              className="text-sm text-pretty"
+              className="text-xs tracking-widest mb-3"
+              style={{ color: 'rgba(100,140,220,0.5)', fontFamily: 'Cinzel, serif' }}
+            >
+              Most Compatible
+            </p>
+            <p
+              className="text-xl mb-4"
+              style={{
+                fontFamily: 'Shippori Mincho, serif',
+                fontWeight: 300,
+                color: 'rgba(100, 140, 220, 0.9)',
+              }}
+            >
+              {result.compatible_type}
+            </p>
+            <p
+              className="text-xs text-pretty"
               style={{
                 fontFamily: 'Shippori Mincho, serif',
                 lineHeight: '1.9',
-                color: 'rgba(184,197,214,0.7)',
-                fontStyle: 'italic',
+                color: 'rgba(184,197,214,0.55)',
               }}
             >
-              {result.partner_advice}
+              あなたの深淵を最も深く理解し、共鳴できる存在。互いの影が重なることで、はじめて完全な像が結ばれる。
             </p>
-          </motion.div>
-        )}
+          </div>
+        </motion.div>
 
         <Divider />
 
         {/* ── 軸スコアチャート ── */}
-        {result.axis_scores && (
+        {result.radar_scores && (
           <motion.div className="px-2" variants={itemVariants}>
             <SectionLabel>BDSM Spectrum Score</SectionLabel>
-            <AxisChart scores={result.axis_scores} dominantAxis={result.dominant_axis} />
+            <AxisChart scores={result.radar_scores} />
           </motion.div>
         )}
 
@@ -203,7 +253,7 @@ export default function ResultPage() {
         {/* ── タイプ一覧 ── */}
         <motion.div className="px-2" variants={itemVariants}>
           <TypeLandscape
-            dominantAxis={result.dominant_axis}
+            radarScores={result.radar_scores}
             compatibleType={result.compatible_type}
           />
         </motion.div>
@@ -211,7 +261,44 @@ export default function ResultPage() {
         <Divider />
 
         {/* ── アクション ── */}
-        <motion.div className="flex flex-col gap-4 px-2" variants={itemVariants}>
+        <motion.div className="flex flex-col gap-3 px-2" variants={itemVariants}>
+
+          {/* 画像保存 */}
+          <button
+            onClick={handleSaveImage}
+            disabled={imageState === 'generating'}
+            className="flex items-center justify-center py-4 text-sm tracking-widest"
+            style={{
+              border: '1px solid rgba(100,140,220,0.3)',
+              background: imageState === 'done'
+                ? 'rgba(26,43,72,0.3)'
+                : 'transparent',
+              color: imageState === 'generating'
+                ? 'rgba(184, 197, 214, 0.3)'
+                : 'rgba(100,140,220,0.8)',
+              cursor: imageState === 'generating' ? 'default' : 'pointer',
+              fontFamily: 'Cinzel, serif',
+            }}
+          >
+            {imageState === 'generating'
+              ? 'Generating...'
+              : imageState === 'done'
+              ? 'Image Saved'
+              : 'Save Diagnosis Card'}
+          </button>
+
+          <p
+            className="text-xs text-center"
+            style={{
+              fontFamily: 'Shippori Mincho, serif',
+              color: 'rgba(184, 197, 214, 0.3)',
+              lineHeight: '1.6',
+            }}
+          >
+            画像を保存して、X投稿に添付できます
+          </p>
+
+          {/* X 共有 */}
           <a
             href={`https://x.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
             target="_blank"

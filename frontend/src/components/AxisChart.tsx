@@ -1,32 +1,28 @@
 import { motion } from 'framer-motion'
-import type { AxisScores } from '../types'
+import type { RadarScores } from '../types'
 
-const AXIS_LABELS: Record<keyof AxisScores, { ja: string; en: string }> = {
-  dominance:    { ja: '支配',   en: 'Dominance' },
-  submission:   { ja: '服従',   en: 'Submission' },
-  bondage:      { ja: '拘束',   en: 'Bondage' },
-  discipline:   { ja: '調教',   en: 'Discipline' },
-  sadism:       { ja: '加虐',   en: 'Sadism' },
-  masochism:    { ja: '被虐',   en: 'Masochism' },
-  psychological:{ ja: '心理',   en: 'Psychological' },
-  sensory:      { ja: '感覚',   en: 'Sensory' },
-  exhibitionism:{ ja: '露出',   en: 'Exhibitionism' },
-  voyeurism:    { ja: '観察',   en: 'Voyeurism' },
+const AXIS_LABELS: Record<keyof RadarScores, { ja: string; en: string }> = {
+  Dominance:     { ja: '支配',   en: 'Dominance' },
+  Submission:    { ja: '服従',   en: 'Submission' },
+  Sadism:        { ja: '加虐',   en: 'Sadism' },
+  Masochism:     { ja: '被虐',   en: 'Masochism' },
+  Psychological: { ja: '心理',   en: 'Psychological' },
 }
 
 interface Props {
-  scores: AxisScores
-  dominantAxis: string
+  scores: RadarScores
 }
 
-export function AxisChart({ scores, dominantAxis }: Props) {
-  const sorted = (Object.entries(scores) as [keyof AxisScores, number][])
+export function AxisChart({ scores }: Props) {
+  const sorted = (Object.entries(scores) as [keyof RadarScores, number][])
     .sort(([, a], [, b]) => b - a)
+
+  const dominant = sorted[0][0]
 
   return (
     <div className="w-full">
       {sorted.map(([key, score], i) => {
-        const isDominant = key === dominantAxis
+        const isDominant = key === dominant
         const label = AXIS_LABELS[key]
 
         return (

@@ -11,10 +11,13 @@ export interface Phase3Texts {
   question2: string
 }
 
+export type QuestionSet = 'default' | 'bdsm'
+
 export interface AnalyzeRequest {
   phase1Answers: Phase1Answers
   phase2Answers: Phase2Answers
-  phase3Answers: Phase3Texts
+  phase3Answers: Record<string, string>
+  questionSet?: QuestionSet
 }
 
 export interface AxisScores {
@@ -30,16 +33,19 @@ export interface AxisScores {
   voyeurism: number
 }
 
+export interface RadarScores {
+  Dominance: number
+  Submission: number
+  Sadism: number
+  Masochism: number
+  Psychological: number
+}
+
 export interface DiagnosisResult {
   type_name: string
-  type_name_en: string
   catchphrase: string
   description: string
-  core_attributes: string[]
-  dominant_axis: string
-  secondary_axis: string
-  sensory_preference: string
+  radar_scores: RadarScores
+  specific_traits: string[]
   compatible_type: string
-  partner_advice: string
-  axis_scores: AxisScores
 }

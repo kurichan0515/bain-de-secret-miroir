@@ -1,92 +1,58 @@
 import { motion } from 'framer-motion'
+import type { RadarScores } from '../types'
 
 interface TypeInfo {
   key: string
   name: string
-  name_en: string
   description: string
-  dominant_axes: string[]
+  matchFn: (s: RadarScores) => boolean
 }
 
 const ALL_TYPES: TypeInfo[] = [
   {
-    key: 'dominance',
-    name: '優雅なる支配者',
-    name_en: 'Dominant Caregiver',
-    description: '厳格さと優しさを併せ持つ、理想的な支配者。相手の成長を見守りながら、完璧な管理を実現する。',
-    dominant_axes: ['dominance', 'discipline'],
+    key: 'dominance_sadism',
+    name: '規律と執着の支配者',
+    description: '相手の感情の揺れや、罰を通じたコントロールに悦びを見出す。直接的で熱を帯びた支配の中に、深い執着が宿る。',
+    matchFn: (s) => s.Dominance - s.Submission > 20 && s.Sadism >= s.Psychological,
   },
   {
-    key: 'submission',
-    name: '深淵の探求者',
-    name_en: 'Submissive Seeker',
-    description: '服従の中に安らぎを見出す献身的な魂。信頼できる相手の前でのみ、真の自分を晒すことができる。',
-    dominant_axes: ['submission', 'masochism'],
+    key: 'dominance_psychological',
+    name: '静寂なる傀儡師',
+    description: '言葉や視線で相手の心理的な逃げ道を塞ぐ冷徹な存在。物理的な力ではなく、沈黙と観察によって支配を確立する。',
+    matchFn: (s) => s.Dominance - s.Submission > 20 && s.Psychological > s.Sadism,
   },
   {
-    key: 'psychological',
-    name: '心理的支配者',
-    name_en: 'Psychological Master',
-    description: '精神的な駆け引きを好む知的な支配者。言葉と沈黙で相手の心を自在に操る。',
-    dominant_axes: ['psychological', 'dominance'],
+    key: 'submission_masochism',
+    name: '盲目的な殉教者',
+    description: '与えられる冷たさや痛みを愛情の証として受け入れ、極限まで依存することを望む。その献身に、独自の美学が宿る。',
+    matchFn: (s) => s.Submission - s.Dominance > 20 && s.Masochism >= s.Psychological,
   },
   {
-    key: 'sensory',
-    name: '感覚の芸術家',
-    name_en: 'Sensory Artist',
-    description: '五感を通じた繊細な刺激を追求する美学者。温度・音・触覚のすべてを官能へと昇華させる。',
-    dominant_axes: ['sensory'],
+    key: 'submission_psychological',
+    name: '硝子の檻の住人',
+    description: '見られること、隔離されること、精神的な閉塞感に安堵を覚える。静かで逃避的な服従の中に、深い自由を見出す。',
+    matchFn: (s) => s.Submission - s.Dominance > 20 && s.Psychological > s.Masochism,
   },
   {
-    key: 'masochism',
-    name: '献身的な被虐者',
-    name_en: 'Masochistic Devotee',
-    description: '痛みと快楽の境界を探求する勇敢な魂。限界を超えた先にある恍惚を知る者。',
-    dominant_axes: ['masochism', 'submission'],
-  },
-  {
-    key: 'sadism',
-    name: '冷徹なる観察者',
-    name_en: 'Sadistic Observer',
-    description: '相手の反応を冷静に観察し、刺激を与える探求者。感情を排した精密な支配を行使する。',
-    dominant_axes: ['sadism', 'voyeurism'],
-  },
-  {
-    key: 'exhibitionism',
-    name: '舞台の主役',
-    name_en: 'Exhibitionist Performer',
-    description: '見られることで輝く表現者。視線を浴びることで自己を確認し、存在を証明する。',
-    dominant_axes: ['exhibitionism'],
-  },
-  {
-    key: 'voyeurism',
-    name: '静かなる演出家',
-    name_en: 'Voyeuristic Director',
-    description: '観察し導く視線を持つ演出者。すべてを見通しながら、影から舞台を作り上げる。',
-    dominant_axes: ['voyeurism', 'dominance'],
-  },
-  {
-    key: 'analytical',
-    name: '知的な両刃',
-    name_en: 'Analytical Switch',
-    description: '状況に応じて役割を変える柔軟な知性派。支配と服従の両方を深く理解し、自在に使いこなす。',
-    dominant_axes: ['psychological'],
-  },
-  {
-    key: 'bondage',
-    name: '拘束の詩人',
-    name_en: 'Bondage Enthusiast',
-    description: '束縛という芸術を愛する美的探求者。縄目や金属の冷たさに、言葉では表せない美を見出す。',
-    dominant_axes: ['bondage'],
+    key: 'switch_psychological',
+    name: '合わせ鏡の共犯者',
+    description: '互いの腹を探り合い、役割が入れ替わるヒリヒリとした心理戦を愛する。境界線の揺らぎそのものがこの者の本質だ。',
+    matchFn: (s) => Math.abs(s.Dominance - s.Submission) <= 20,
   },
 ]
 
+function deriveUserType(scores: RadarScores): string {
+  return (ALL_TYPES.find((t) => t.matchFn(scores)) ?? ALL_TYPES[4]).key
+}
+
 interface Props {
-  dominantAxis: string
+  radarScores: RadarScores
   compatibleType: string
 }
 
-export function TypeLandscape({ dominantAxis, compatibleType }: Props) {
+export function TypeLandscape({ radarScores, compatibleType }: Props) {
+  const userKey = deriveUserType(radarScores)
+
   return (
     <div className="w-full">
       <p
@@ -98,17 +64,17 @@ export function TypeLandscape({ dominantAxis, compatibleType }: Props) {
 
       <div className="flex flex-col gap-3">
         {ALL_TYPES.map((type, i) => {
-          const isUser = type.dominant_axes.includes(dominantAxis)
-          const isCompatible = type.name === compatibleType || type.name_en === compatibleType
+          const isUser = type.key === userKey
+          const isCompatible = type.name === compatibleType
 
           return (
             <motion.div
               key={type.key}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: i * 0.06 }}
               style={{
-                padding: '12px 14px',
+                padding: '14px 16px',
                 border: '1px solid',
                 borderColor: isUser
                   ? 'rgba(255,255,255,0.2)'
@@ -117,11 +83,12 @@ export function TypeLandscape({ dominantAxis, compatibleType }: Props) {
                   : 'rgba(255,255,255,0.05)',
                 background: isUser
                   ? 'rgba(26,43,72,0.3)'
+                  : isCompatible
+                  ? 'rgba(26,43,72,0.12)'
                   : 'transparent',
                 position: 'relative',
               }}
             >
-              {/* バッジ */}
               {isUser && (
                 <span
                   className="absolute top-2 right-2 text-xs px-2 py-0.5"
@@ -151,27 +118,15 @@ export function TypeLandscape({ dominantAxis, compatibleType }: Props) {
                 </span>
               )}
 
-              <div className="flex items-baseline gap-2 mb-1">
-                <span
-                  className="text-sm font-light"
-                  style={{
-                    fontFamily: 'Shippori Mincho, serif',
-                    color: isUser ? '#FFFFFF' : 'rgba(255,255,255,0.6)',
-                  }}
-                >
-                  {type.name}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'Cinzel, serif',
-                    fontSize: '9px',
-                    color: 'rgba(184,197,214,0.3)',
-                    letterSpacing: '0.05em',
-                  }}
-                >
-                  {type.name_en}
-                </span>
-              </div>
+              <p
+                className="text-sm font-light mb-1"
+                style={{
+                  fontFamily: 'Shippori Mincho, serif',
+                  color: isUser ? '#FFFFFF' : isCompatible ? 'rgba(100,140,220,0.9)' : 'rgba(255,255,255,0.6)',
+                }}
+              >
+                {type.name}
+              </p>
               <p
                 className="text-xs text-pretty"
                 style={{

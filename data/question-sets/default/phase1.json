@@ -1,0 +1,307 @@
+{
+  "phase": 1,
+  "title": "直感スワイプ",
+  "description": "1〜2秒で直感的に「惹かれる（右）」か「惹かれない（左）」かを選んでください",
+  "questions": [
+    {
+      "id": 1,
+      "text": "予定や習慣を、少しずつ自分色に染めていきたい",
+      "category": "active",
+      "axes": ["dominance", "psychological"]
+    },
+    {
+      "id": 2,
+      "text": "レストランのメニューなどで迷っている時は、すべて決めてあげたい",
+      "category": "active",
+      "axes": ["dominance"]
+    },
+    {
+      "id": 3,
+      "text": "私が選んだ服を少し照れながらも、身に纏う姿がいとおしい",
+      "category": "active",
+      "axes": ["dominance", "sensory"]
+    },
+    {
+      "id": 4,
+      "text": "相手の隠し事を少しずつ逃げ道を塞いで\n自ら打ち明けるのを静かに待ちたい",
+      "category": "active",
+      "axes": ["psychological", "dominance"]
+    },
+    {
+      "id": 5,
+      "text": "ちょっとした意地悪な言葉をかけて、戸惑う瞳をじっくり観察したい",
+      "category": "active",
+      "axes": ["psychological", "voyeurism"]
+    },
+    {
+      "id": 6,
+      "text": "二人だけの「特別なルール」を作り、それを守らせることに密かな喜びを感じる",
+      "category": "active",
+      "axes": ["dominance", "discipline"]
+    },
+    {
+      "id": 7,
+      "text": "私がいなければダメになってしまうくらい、深く依存されることに惹かれる",
+      "category": "active",
+      "axes": ["dominance", "psychological"]
+    },
+    {
+      "id": 8,
+      "text": "甘えを許さず、けれど逃げ場のない正論で諭す時間が好き",
+      "category": "active",
+      "axes": ["dominance", "discipline"]
+    },
+    {
+      "id": 9,
+      "text": "欲しがっているものをすぐには与えず、甘い焦らしを楽しみたい",
+      "category": "active",
+      "axes": ["dominance", "psychological"]
+    },
+    {
+      "id": 10,
+      "text": "指先や声のトーンひとつで、感情が揺れ動くのを感じたい",
+      "category": "active",
+      "axes": ["dominance", "sensory"]
+    },
+    {
+      "id": 11,
+      "text": "相手の肌に、私だけが知っている「秘密の印」を\nそっと残したい",
+      "category": "active",
+      "axes": ["dominance", "exhibitionism"]
+    },
+    {
+      "id": 12,
+      "text": "私に対してのみ相手が言葉遣いを崩さず、丁寧な態度で接してくるのが好き",
+      "category": "active",
+      "axes": ["dominance", "discipline"]
+    },
+    {
+      "id": 13,
+      "text": "あえて情報を与えず、私の言葉だけを信じてついてきてほしい",
+      "category": "active",
+      "axes": ["dominance", "psychological"]
+    },
+    {
+      "id": 14,
+      "text": "普段は気丈な相手が、私にだけは素直に折れて頼ってくる姿に\n強く惹かれる",
+      "category": "active",
+      "axes": ["dominance", "psychological"]
+    },
+    {
+      "id": 15,
+      "text": "私が描いた完璧なシナリオの中で、心地よさそうに振る舞う姿を見るのが好き",
+      "category": "active",
+      "axes": ["dominance", "voyeurism"]
+    },
+    {
+      "id": 16,
+      "text": "休日の予定も着る服も、すべて誰かに「これがいい」と決めてほしい",
+      "category": "passive",
+      "axes": ["submission"]
+    },
+    {
+      "id": 17,
+      "text": "「ここで待っていて」と言われたら、その言葉に縛られて静かに待っていたい",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 18,
+      "text": "自分で決断するより、少し強引なくらいに手を引かれる方が安心する",
+      "category": "passive",
+      "axes": ["submission"]
+    },
+    {
+      "id": 19,
+      "text": "失敗した時は優しく慰められるより、静かに厳しく諭されたい",
+      "category": "passive",
+      "axes": ["submission", "discipline"]
+    },
+    {
+      "id": 20,
+      "text": "スケジュールや余裕をすべて他人に預け、自分の意思を手放すことに憧れる",
+      "category": "passive",
+      "axes": ["submission"]
+    },
+    {
+      "id": 21,
+      "text": "自分が誰かの「特別」であるより、絶対的に必要な「一部」として扱われたい",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 22,
+      "text": "「いい子だね」と静かに認められるためなら、少しの無理も心地よく感じる",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 23,
+      "text": "相手の期待を裏切ってしまった時、冷たい態度で突き放されると\n逆に目が離せなくなる",
+      "category": "passive",
+      "axes": ["submission", "masochism"]
+    },
+    {
+      "id": 24,
+      "text": "限界まで焦らされ、自分から「お願い」をして初めて\n与えられることに喜びを感じる",
+      "category": "passive",
+      "axes": ["submission", "masochism"]
+    },
+    {
+      "id": 25,
+      "text": "満員電車や狭い空間など、身動きが取れず「どうしようもない状況」に\n身を任せる感覚が好き",
+      "category": "passive",
+      "axes": ["submission", "bondage"]
+    },
+    {
+      "id": 26,
+      "text": "目を隠されたり情報を遮断されたりして、すべてを委ねる時の不安と安堵",
+      "category": "passive",
+      "axes": ["submission", "sensory"]
+    },
+    {
+      "id": 27,
+      "text": "重みのあるアクセサリーやタイトな服など、少し窮屈なものを好んで身につける",
+      "category": "passive",
+      "axes": ["bondage", "sensory"]
+    },
+    {
+      "id": 28,
+      "text": "相手の温度のない視線や、時折見せる無関心な態度に\nどうしても惹かれてしまう",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 29,
+      "text": "冷たく突き放された後、不意に見せられる優しい執着に抗えない",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 30,
+      "text": "自分の弱さや秘密をすべて握られ、もう後戻りできない状況に密かな憧れがある",
+      "category": "passive",
+      "axes": ["submission", "psychological"]
+    },
+    {
+      "id": 31,
+      "text": "完全に一人の空間より、誰かの「視線」を\n感じるかもしれない緊張感が好き",
+      "category": "observer",
+      "axes": ["voyeurism", "exhibitionism"]
+    },
+    {
+      "id": 32,
+      "text": "窓ガラスや鏡越しに自分たちの姿を、映画のワンシーンのように客観的に眺めたい",
+      "category": "observer",
+      "axes": ["voyeurism", "exhibitionism"]
+    },
+    {
+      "id": 33,
+      "text": "人前では真面目な関係を装い、二人きりになった瞬間に\n空気が反転するのが好き",
+      "category": "observer",
+      "axes": ["psychological", "exhibitionism"]
+    },
+    {
+      "id": 34,
+      "text": "他の人がいる前で、二人にしか分からない視線や\n秘密の合図を交わしたい",
+      "category": "observer",
+      "axes": ["psychological", "voyeurism"]
+    },
+    {
+      "id": 35,
+      "text": "他人のスマートフォンや手帳など、見てはいけない領域に触れる瞬間のスリル",
+      "category": "observer",
+      "axes": ["voyeurism", "psychological"]
+    },
+    {
+      "id": 36,
+      "text": "日常の自分とは全く違う、もう一つの「顔」を演じることに\n密かな快感を覚える",
+      "category": "observer",
+      "axes": ["psychological", "exhibitionism"]
+    },
+    {
+      "id": 37,
+      "text": "誰にも言えない秘密の取り決めを交わし、その見えない糸に縛られる関係に憧れる",
+      "category": "observer",
+      "axes": ["psychological", "bondage"]
+    },
+    {
+      "id": 38,
+      "text": "感情をぶつけ合うよりも、お互いの出方を探り合うような\n静かな頭脳戦が好き",
+      "category": "observer",
+      "axes": ["psychological"]
+    },
+    {
+      "id": 39,
+      "text": "相手の一番脆い部分を握り、それを盾に静かに微笑む関係が心地よい",
+      "category": "observer",
+      "axes": ["psychological", "dominance"]
+    },
+    {
+      "id": 40,
+      "text": "一線を越えるか越えないかの、曖昧でヒリヒリとした境界線を\n長く漂っていたい",
+      "category": "observer",
+      "axes": ["psychological", "sensory"]
+    },
+    {
+      "id": 41,
+      "text": "静かな廊下に響くヒールの音や足音に、理由のない緊張と魅力を感じる",
+      "category": "sensory",
+      "axes": ["sensory", "psychological"]
+    },
+    {
+      "id": 42,
+      "text": "部屋の鍵が「カチャリ」と閉まる音を聞くと、特別な時間が始まるという高揚感がある",
+      "category": "sensory",
+      "axes": ["sensory", "bondage"]
+    },
+    {
+      "id": 43,
+      "text": "体温を持たない冷たい金属や、滑らかなシルクの質感に触れるのが好きだ",
+      "category": "sensory",
+      "axes": ["sensory"]
+    },
+    {
+      "id": 44,
+      "text": "相手の呼吸や\n衣擦れの音だけがリアルに感じられる、薄暗い空間に惹かれる",
+      "category": "sensory",
+      "axes": ["sensory", "psychological"]
+    },
+    {
+      "id": 45,
+      "text": "首元を軽く覆うタートルネックや、手首を飾るブレスレットの重みが好きだ",
+      "category": "sensory",
+      "axes": ["sensory", "bondage"]
+    },
+    {
+      "id": 46,
+      "text": "予測できないタイミングで、不意に背後から距離を詰められると心が跳ねる",
+      "category": "sensory",
+      "axes": ["sensory", "psychological"]
+    },
+    {
+      "id": 47,
+      "text": "少し息が苦しくなるくらい\n強い力で抱きしめられると、自分が存在していると実感する",
+      "category": "sensory",
+      "axes": ["sensory", "submission"]
+    },
+    {
+      "id": 48,
+      "text": "眩しい光よりも、間接照明や月明かりだけの空間にずっといたい",
+      "category": "sensory",
+      "axes": ["sensory"]
+    },
+    {
+      "id": 49,
+      "text": "誰かが自分のすぐ後ろに立っている\nという「気配」だけで背筋が微かに粟立つ",
+      "category": "sensory",
+      "axes": ["sensory", "psychological"]
+    },
+    {
+      "id": 50,
+      "text": "すべてが終わった後の感情の波が引いていく、静かで虚無的な時間を愛している",
+      "category": "sensory",
+      "axes": ["sensory", "psychological"]
+    }
+  ]
+}

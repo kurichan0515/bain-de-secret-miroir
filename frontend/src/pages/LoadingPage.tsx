@@ -17,7 +17,7 @@ const messages = [
 
 export default function LoadingPage() {
   const navigate = useNavigate()
-  const { phase1Answers, phase2Answers, phase3Answers, setResult } = useAnswerStore()
+  const { phase1Answers, phase2Answers, phase3Answers, questionSet, setResult } = useAnswerStore()
   const [messageIndex, setMessageIndex] = useState(0)
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function LoadingPage() {
 
     const call = USE_MOCK
       ? mockAnalyze()
-      : analyze({ phase1Answers, phase2Answers, phase3Answers })
+      : analyze({ phase1Answers, phase2Answers, phase3Answers, questionSet })
 
     call
       .then((result) => {

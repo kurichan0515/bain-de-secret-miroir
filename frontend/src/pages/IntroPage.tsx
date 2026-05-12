@@ -1,8 +1,19 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useAnswerStore } from '../store/useAnswerStore'
+import type { QuestionSet } from '../store/useAnswerStore'
 
 export default function IntroPage() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const setQuestionSet = useAnswerStore((s) => s.setQuestionSet)
+
+  useEffect(() => {
+    const mode = searchParams.get('mode')
+    const set: QuestionSet = mode === 'bdsm' ? 'bdsm' : 'default'
+    setQuestionSet(set)
+  }, [searchParams, setQuestionSet])
 
   return (
     <motion.div
