@@ -34,7 +34,27 @@
       "Bash(curl -s -X POST 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=AIzaSyArX5Yxiy2ngy9U7GiGqVcFKrysLyJNKmM' -H 'Content-Type: application/json' -d '{ *)",
       "Bash(bash scripts/deploy-frontend.sh)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(mkdir -p /home/kurichan0515/hobby/bain-de-secret-miroir/data/question-sets/bdsm)",
+      "Bash(cp /home/kurichan0515/hobby/bain-de-secret-miroir/data/phase1.json /home/kurichan0515/hobby/bain-de-secret-miroir/data/question-sets/bdsm/)",
+      "Bash(cp /home/kurichan0515/hobby/bain-de-secret-miroir/data/phase2.json /home/kurichan0515/hobby/bain-de-secret-miroir/data/question-sets/bdsm/)",
+      "Bash(cp /home/kurichan0515/hobby/bain-de-secret-miroir/data/phase3.json /home/kurichan0515/hobby/bain-de-secret-miroir/data/question-sets/bdsm/)",
+      "Bash(cp /home/kurichan0515/hobby/bain-de-secret-miroir/data/scoring_config.json /home/kurichan0515/hobby/bain-de-secret-miroir/data/question-sets/bdsm/)",
+      "Bash(npm uninstall *)",
+      "Bash(xargs ls)",
+      "Bash(npx tsc *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'Q{q[\\\\\"id\\\\\"]}: {q[\\\\\"title\\\\\"]} / choices: {[c[\\\\\"id\\\\\"]+\\\\\" \\\\\"+c[\\\\\"tag\\\\\"] for c in q[\\\\\"choices\\\\\"]]}'\\) for q in d['questions']]\")",
+      "Bash(node -e ' *)",
+      "Bash(git add *)",
+      "Bash(bash /home/kurichan0515/hobby/bain-de-secret-miroir/scripts/deploy-frontend.sh)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(f'Q{q[\\\\\"id\\\\\"]}: {[\\(c[\\\\\"id\\\\\"],c[\\\\\"tag\\\\\"]\\) for c in q[\\\\\"choices\\\\\"]]}'\\) for q in d['questions']]\")",
+      "Bash(curl -s -X POST https://2l0jgpfxv6.execute-api.ap-northeast-1.amazonaws.com/api/analyze -H 'Content-Type: application/json' -d '{\"phase1Answers\":{\"1\":true,\"2\":false},\"phase2Answers\":{\"1\":\"B\"},\"phase3Answers\":{\"dominant_1\":\"テスト\"},\"questionSet\":\"default\"}')",
+      "Bash(apt list *)",
+      "Read(//usr/bin/**)",
+      "Bash(command -v zip bzip2 gzip)",
+      "Bash(apt-get install *)",
+      "Bash(bash /tmp/test_api.sh)",
+      "Bash(aws logs *)"
     ]
   }
 }

@@ -7,6 +7,7 @@ const AXIS_LABELS: Record<keyof RadarScores, { ja: string; en: string }> = {
   Sadism:        { ja: '加虐',   en: 'Sadism' },
   Masochism:     { ja: '被虐',   en: 'Masochism' },
   Psychological: { ja: '心理',   en: 'Psychological' },
+  Sensory:       { ja: '五感',   en: 'Sensory' },
 }
 
 interface Props {

@@ -54,6 +54,7 @@ export interface RadarScores {
   Sadism: number
   Masochism: number
   Psychological: number
+  Sensory: number
 }
 
 export interface DiagnosisResult {

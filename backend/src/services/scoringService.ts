@@ -44,8 +44,10 @@ for (let i = 9; i <= 15; i++) DEFAULT_P1_SCORES[String(i)] = { dominance: 1, sad
 for (let i = 16; i <= 22; i++) DEFAULT_P1_SCORES[String(i)] = { submission: 1 }
 // Q23–Q30: 窮屈さ・冷たさ → S +1, Mas +1
 for (let i = 23; i <= 30; i++) DEFAULT_P1_SCORES[String(i)] = { submission: 1, masochism: 1 }
-// Q31–Q50: 観測・背徳 + 五感・空間 → Psy +1
-for (let i = 31; i <= 50; i++) DEFAULT_P1_SCORES[String(i)] = { psychological: 1 }
+// Q31–Q40: 観測・背徳・視線・心理戦 → Psy +1
+for (let i = 31; i <= 40; i++) DEFAULT_P1_SCORES[String(i)] = { psychological: 1 }
+// Q41–Q50: 五感・音・質感・気配 → Sensory +1
+for (let i = 41; i <= 50; i++) DEFAULT_P1_SCORES[String(i)] = { sensory: 1 }
 
 // Phase 2 スコアテーブル (AxisScores外の care は別途管理)
 const DEFAULT_P2_SCORES: Record<string, Record<string, ScoreDelta>> = {
@@ -56,7 +58,7 @@ const DEFAULT_P2_SCORES: Record<string, Record<string, ScoreDelta>> = {
     'D': { dominance: 1, submission: 1 },
   },
   '2': {
-    'A': { sadism: 3 },
+    'A': { psychological: 2, sensory: 1 },
     'B': { masochism: 3 },
     'C': { psychological: 3 },
     'D': { dominance: 3, sadism: 1 },

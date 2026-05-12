@@ -11,9 +11,10 @@ const MOCK_RESULT: DiagnosisResult = {
     Sadism: 35,
     Masochism: 15,
     Psychological: 100,
+    Sensory: 45,
   },
   specific_traits: ['心理的支配', '視線への執着', '静かなる観察'],
-  compatible_type: '深淵の探求者',
+  compatible_type: '硝子の檻の住人',
 }
 
 export async function mockAnalyze(): Promise<DiagnosisResult> {

@@ -88,6 +88,7 @@ function drawScoreBars(ctx: CanvasRenderingContext2D, scores: RadarScores) {
     ['加虐', scores.Sadism],
     ['被虐', scores.Masochism],
     ['心理', scores.Psychological],
+    ['五感', scores.Sensory],
   ]
   const maxVal = Math.max(...entries.map(([, v]) => v))
 
@@ -167,9 +168,9 @@ function drawRadarChart(
   cy: number,
   radius: number,
 ) {
-  const axes = ['Dominance', 'Submission', 'Sadism', 'Masochism', 'Psychological'] as const
+  const axes = ['Dominance', 'Submission', 'Sadism', 'Masochism', 'Psychological', 'Sensory'] as const
   const ja: Record<string, string> = {
-    Dominance: '支配', Submission: '服従', Sadism: '加虐', Masochism: '被虐', Psychological: '心理',
+    Dominance: '支配', Submission: '服従', Sadism: '加虐', Masochism: '被虐', Psychological: '心理', Sensory: '五感',
   }
   const n = axes.length
   const angle = (i: number) => (i * 2 * Math.PI) / n - Math.PI / 2
